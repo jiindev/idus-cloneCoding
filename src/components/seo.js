@@ -34,6 +34,9 @@ function SEO({ description, lang, meta, title }) {
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
+      link={[{
+        rel: 'stylesheet', href: 'idus_iconpack.css'
+      }]}
       meta={[
         {
           name: `description`,
