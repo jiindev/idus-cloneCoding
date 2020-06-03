@@ -15,6 +15,9 @@ html,body{
   height: 100%;
   font-family: 'NanumBarunGothic';
 }
+*{
+  font-family: 'NanumBarunGothic';
+}
 .center{
   max-width: 1056px;
   margin: 0 auto;
@@ -37,7 +40,7 @@ const Layout = ({ children }) => {
     <>
       <GlobalStyle/>
       <Navigation/>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
         <main>{children}</main>
         <Footer/>
     </>

@@ -148,9 +148,10 @@ const BottomNav = styled.div`
   font-size: 13px;
   color: #666;
   justify-content: center;
-  box-shadow: 3px 3px 3px rgba(0,0,0,.2), 0 1px 0 #d9d9d9;
+  box-shadow: 0 4px 4px rgba(0,0,0,.2), 0 1px 0 #d9d9d9;
   position: sticky;
   top: 0;
+  z-index: 30;
   & ul{
     display: flex;
     & li{
