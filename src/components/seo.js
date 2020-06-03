@@ -36,6 +36,8 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       link={[{
         rel: 'stylesheet', href: 'idus_iconpack.css'
+      },{
+        rel: 'stylesheet', href: 'fontawesome-iconpack.css'
       }]}
       meta={[
         {
