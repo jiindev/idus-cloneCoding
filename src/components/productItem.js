@@ -1,26 +1,26 @@
+import React, {memo, useEffect, useCallback} from "react";
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
 import styled from 'styled-components';
 import Star from "./star"
 
-const ProductItem = ({ data }) => (
+const ProductItem = memo(({ data }) => (
     <li>
         <div>
-        <Thumbnail thumbnailUrl={data.thumbnailUrl}><span/></Thumbnail>
+        <Thumbnail thumbnailUrl={data && data.thumbnailUrl}><span/></Thumbnail>
         <Text>
             <div className="title">
-            <span>{data.artist}</span>
-            <h4>{data.title}</h4>
+            <span>{data && data.artist}</span>
+            <h4>{data && data.title}</h4>
             </div>
             <div className="review">
-            <Star starNum={data.review.star}/>
-            {data.review.text}
+            <Star starNum={data && data.review.star}/>
+            {data && data.review.text}
             </div>
         </Text>
         </div>
     </li>
-);
+));
 
 const Thumbnail = styled.div`
     width: 100%;
@@ -60,11 +60,19 @@ const Text = styled.div`
 `;
 
 ProductItem.propTypes = {
-  siteTitle: PropTypes.string,
+  data: PropTypes.object,
 }
 
 ProductItem.defaultProps = {
-  siteTitle: ``,
+  data: {
+    thumbnailUrl: 'jeje.jpeg',
+    artist:'지수', 
+    title:'화난 고양이 제제', 
+    review:{
+      star:5, 
+      text:'너무 귀엽고 앙큼한 고양이에...'
+    }
+  },
 }
 
 export default ProductItem

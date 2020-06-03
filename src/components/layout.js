@@ -18,6 +18,10 @@ html,body{
 *{
   font-family: 'NanumBarunGothic';
 }
+a{
+  text-decoration: none;
+  color: inherit;
+}
 .center{
   max-width: 1056px;
   margin: 0 auto;

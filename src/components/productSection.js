@@ -1,13 +1,13 @@
+import React, {memo, useEffect, useCallback} from "react";
 import {useState} from 'react';
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
 import styled from 'styled-components';
 import ProductItem from './productItem';
 
-const ProductSecion = ({ title, iconClass, data }) => {
+const ProductSecion = memo(({ title, iconClass, data, link }) => {
     const [page, setPage] = useState(1);
-    const onChangePage = pageDirection => () => {
+    const onChangePage = useCallback(pageDirection => () => {
         if(pageDirection === 'left'){
             if(page===1){
                 setPage(5);
@@ -17,7 +17,8 @@ const ProductSecion = ({ title, iconClass, data }) => {
                 setPage(1);
             }else setPage(page+1);
         }
-    }
+    }, [page]);
+
     return(
     <Wrap>
       <div className="center">
@@ -29,20 +30,21 @@ const ProductSecion = ({ title, iconClass, data }) => {
             <button onClick={onChangePage('right')}><i className="ui_icon--arrow-right"/></button>
           </div>
         </Title>
-        <ul>
-          {data.map((v, i)=>(
+        <ProductList>
+          {data && data.map((v, i)=>(
             <ProductItem data={v} key={i}/>
           ))}
-        </ul>
-        <MoreButton>{title} 더보기</MoreButton>
+        </ProductList>
+        <Link to={`/main/${link}`}><MoreButton>{title} 더보기</MoreButton></Link>
       </div>
     </Wrap>
     );
-};
+});
 
 const Wrap = styled.div`
   padding: 40px 0;
-  & ul{
+`;
+export const ProductList = styled.ul`
     display: flex;
     flex-wrap: wrap;
     & li{
@@ -56,7 +58,6 @@ const Wrap = styled.div`
         background-color: #f8f9fb;
       }
     }
-  }
 `;
 const Title = styled.div`
   color: #333;
@@ -120,6 +121,7 @@ const MoreButton = styled.button`
     color: #333;
     background: none;
     transition: all .2s ease;
+    outline: none;
     &:hover{
         background: #f5f5f5;;
     }

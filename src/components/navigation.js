@@ -2,7 +2,10 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from 'styled-components';
 
-const Navigation = ({ siteTitle }) => (
+const Navigation = ({ siteTitle }) => {
+  const path = typeof window !== 'undefined' ? window.location.pathname : '';
+
+  return (
     <Nav>
     <TopNav>
       <div className="center">
@@ -33,23 +36,24 @@ const Navigation = ({ siteTitle }) => (
     </MiddleNav>
     <BottomNav>
       <ul>
-        <li>카테고리</li>
-        <li className="active">홈</li>
-        <li>추천 작품</li>
-        <li>실시간 구매</li>
-        <li>실시간 후기</li>
-        <li>작가님 추천</li>
-        <li>실시간 추천</li>
-        <li>인기 작품</li>
-        <li>스토리</li>
-        <li>동영상</li>
-        <li>최신 작품</li>
-        <li>맞춤 추천</li>
-        <li>인기 작가</li>
+        <Menu>카테고리</Menu>
+        <Menu activeMenu={path==='/'}><Link to="/">홈</Link></Menu>
+        <Menu activeMenu={path==='/main/today-recommend-product'}><Link to="/main/today-recommend-product">추천 작품</Link></Menu>
+        <Menu activeMenu={path==='/main/liver-order-product'}><Link to="/main/liver-order-product">실시간 구매</Link></Menu>
+        <Menu>실시간 후기</Menu>
+        <Menu activeMenu={path==='/main/recommend-artist-product'}><Link to="/main/recommend-artist-product">작가님 추천</Link></Menu>
+        <Menu activeMenu={path==='/main/live-recommend-product'}><Link to="/main/live-recommend-product">실시간 추천</Link></Menu>
+        <Menu>인기 작품</Menu>
+        <Menu>스토리</Menu>
+        <Menu>동영상</Menu>
+        <Menu activeMenu={path==='/main/new-product'}><Link to="/main/new-product">최신 작품</Link></Menu>
+        <Menu>맞춤 추천</Menu>
+        <Menu>인기 작가</Menu>
       </ul>
     </BottomNav>
   </Nav>
-);
+  );
+};
 
 
 const Nav = styled.nav`
@@ -154,32 +158,26 @@ const BottomNav = styled.div`
   z-index: 30;
   & ul{
     display: flex;
-    & li{
-      padding: 10px 11px;
-      cursor: pointer;
-      position: relative;
-      &:after{
-          content: '';
-          width: 100%;
-          height: 2px;
-          background-color: #dd5850;
-          display: block;
-          position: absolute;
-          bottom:0;
-          left:0;
-          opacity: 0;
-      }
-      &.active{
-        color: #dd5850;
-        &:after{
-          opacity: 1;
-        }
-      }
-      &:hover{
-        color: #dd5850;
-      }
-    }
   }
+`;
+const Menu = styled.li`
+  padding: 10px 11px;
+        cursor: pointer;
+        position: relative;
+        &:after{
+            content: '';
+            width: 100%;
+            height: 2px;
+            background-color: #dd5850;
+            display: block;
+            position: absolute;
+            bottom:0;
+            left:0;
+            opacity: ${props=>props.activeMenu ? 1 : 0};
+        }
+        &:hover{
+          color: ${props=>props.activeMenu  ? '#dd5850' : '#dd5850'};
+        }
 `;
 const Logo = styled.span`
   display: inline-block;

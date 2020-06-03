@@ -103,12 +103,12 @@ const IndexPage = () => {
     <Layout>
     <SEO title="Home" />
     <Banner>배너</Banner>
-    <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={dummyData}/>
-    <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={dummyData}/>
+    <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={dummyData} link="today-recommend-product"/>
+    <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={dummyData} link="liver-order-product"/>
     <ProductSecion title="실시간 후기" iconClass="ui_icon--pencil" data={dummyData}/>
-    <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={dummyData}/>
-    <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={dummyData}/>
-    <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={dummyData}/>
+    <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={dummyData} link="recommend-artist-product"/>
+    <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={dummyData} link="live-recommend-product"/>
+    <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={dummyData} link="new-product"/>
   </Layout>
   );
 }
