@@ -52,7 +52,7 @@ const Thumbnail = styled.div`
     width: 100%;
     height: 100%;
     background: ${props=>`url('/thumbnail/${props.thumbnailUrl}') no-repeat center center / cover`};
-    transition: all .2s ease;
+    transition: all .5s ease;
   }
   &:hover span{
     transform: scale(1.1);

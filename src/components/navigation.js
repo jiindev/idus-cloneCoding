@@ -1,8 +1,9 @@
 import { Link } from "gatsby"
-import React from "react"
+import React, {memo, useState, useEffect, useRef} from "react"
 import styled from 'styled-components';
+import KeywordRanking from './keywordRanking';
 
-const Navigation = ({ siteTitle }) => {
+const Navigation = memo(({ siteTitle }) => {
   const path = typeof window !== 'undefined' ? window.location.pathname : '';
 
   return (
@@ -27,7 +28,7 @@ const Navigation = ({ siteTitle }) => {
           <input type="text" name="search" id="search" placeholder="작품, 작가 검색"/>
           <button>검색</button>
         </Search>
-        <KeywordRanking><span>1.</span> 녹챠방</KeywordRanking>
+        <KeywordRanking/>
         <ul className="myMenu">
           <li><button><i className="ui_icon--myinfo"/><br/><span>MY 정보</span></button></li>
           <li><button><i className="ui_icon--cart-new"/><br/><span>장바구니</span></button></li>
@@ -62,7 +63,7 @@ const Navigation = ({ siteTitle }) => {
     </MobileNav>
   </Nav>
   );
-};
+});
 
 
 const Nav = styled.nav`
@@ -192,21 +193,7 @@ const Search = styled.div`
     }
   }
 `;
-const KeywordRanking = styled.div`
-  font-size: 14px;
-  color: #666;
-  margin: 0 30px;
-  & span{
-    color: #dd5850;
-    font-weight: 700;
-  }
-  @media only screen and (max-width: 820px) {
-    margin: 0 15px;
-  }
-  @media only screen and (max-width: 720px) {
-    display: none;
-  }
-`;
+
 const BottomNav = styled.div`
   display: flex;
   border-top: 1px solid #d9d9d9;
