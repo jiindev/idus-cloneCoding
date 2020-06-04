@@ -47,17 +47,6 @@ const Wrap = styled.div`
 export const ProductList = styled.ul`
     display: flex;
     flex-wrap: wrap;
-    & li{
-      width: 20%;
-      font-size: 14px;
-      &>div{
-        margin: 8px;
-        border: 1px solid #d9d9d9;
-        border-radius: 5px;
-        overflow: hidden;
-        background-color: #f8f9fb;
-      }
-    }
 `;
 const Title = styled.div`
   color: #333;
@@ -107,7 +96,11 @@ const Title = styled.div`
       }
     }
   }
-  
+  @media only screen and (max-width: 720px) {
+    & h3{
+      border: none;
+    }
+  }
 `;
 
 const MoreButton = styled.button`
@@ -124,6 +117,11 @@ const MoreButton = styled.button`
     outline: none;
     &:hover{
         background: #f5f5f5;;
+    }
+    @media only screen and (max-width: 720px) {
+      width: 100%;
+      font-size: 14px;
+      border: 1px solid #d9d9d9;
     }
 `;
 

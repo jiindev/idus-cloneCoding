@@ -25,6 +25,11 @@ a{
 .center{
   max-width: 1056px;
   margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
 }
 `;
 

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `아이디어스(클론코딩) - 핸드메이드, 수공예, 수제 먹거리`,
+    title: `아이디어스(클론코딩) `,
     description: `아이디어스 클론 코딩 사이트입니다.`,
     author: `jiindev`,
   },

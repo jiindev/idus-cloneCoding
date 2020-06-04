@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Star from "./star"
 
 const ProductItem = memo(({ data }) => (
-    <li>
+    <ProductLi>
         <div>
         <Thumbnail thumbnailUrl={data && data.thumbnailUrl}><span/></Thumbnail>
         <Text>
@@ -19,8 +19,29 @@ const ProductItem = memo(({ data }) => (
             </div>
         </Text>
         </div>
-    </li>
+    </ProductLi>
 ));
+
+const ProductLi = styled.li`
+      width: 20%;
+      font-size: 14px;
+      &>div{
+        margin: 8px;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #f8f9fb;
+      }
+      @media only screen and (max-width: 1056px) {
+        width: 33.33%;
+      }
+      @media only screen and (max-width: 720px) {
+        width: 50%;
+        &>div{
+          margin: 8px 4px;
+        }
+      }
+`;
 
 const Thumbnail = styled.div`
     width: 100%;

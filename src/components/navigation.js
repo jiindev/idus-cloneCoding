@@ -29,8 +29,8 @@ const Navigation = ({ siteTitle }) => {
         </Search>
         <KeywordRanking><span>1.</span> 녹챠방</KeywordRanking>
         <ul className="myMenu">
-          <li><button><i className="ui_icon--myinfo"/><br/>MY 정보</button></li>
-          <li><button><i className="ui_icon--cart-new"/><br/>장바구니</button></li>
+          <li><button><i className="ui_icon--myinfo"/><br/><span>MY 정보</span></button></li>
+          <li><button><i className="ui_icon--cart-new"/><br/><span>장바구니</span></button></li>
         </ul>
       </div>
     </MiddleNav>
@@ -51,6 +51,15 @@ const Navigation = ({ siteTitle }) => {
         <Menu>인기 작가</Menu>
       </ul>
     </BottomNav>
+    <MobileNav>
+        <ul className="myMenu">
+          <li><i className="ui_icon--myinfo"/><br/><span>작품</span></li>
+          <li><i className="ui_icon--class"/><br/><span>금손 클래스</span></li>
+          <li><i className="ui_icon--search"/><br/><span>검색</span></li>
+          <li><i className="ui_icon--category"/><br/><span>카테고리</span></li>
+          <li><i className="ui_icon--myinfo"/><br/><span>내 정보</span></li>
+        </ul>
+    </MobileNav>
   </Nav>
   );
 };
@@ -111,6 +120,23 @@ const MiddleNav = styled.div`
       }
     }
   }
+  @media only screen and (max-width: 720px) {
+    & ul{
+      &.pageMenu{
+        display: none;
+      }
+      &.myMenu{
+        & li:first-child{
+          display: none;
+        }
+        & button{
+          & span{
+            display: none;
+          }
+        }
+      }
+    }
+  }
 `;
 const Search = styled.div`
   & input{
@@ -123,6 +149,9 @@ const Search = styled.div`
     font-size: 16px;
     border-right: 0;
     outline: none;
+    &::placeholder {
+      color: #acacac;
+    }
   }
   & button{
     font-size: 16px;
@@ -135,6 +164,32 @@ const Search = styled.div`
     font-weight: 500;
     outline: none;
     cursor: pointer;
+    box-sizing: border-box;
+  }
+  @media only screen and (max-width: 820px) {
+    & input{
+      width: 210px;
+    }
+    & button{
+      width: 60px;
+      padding: 0;
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    flex:1;
+    display: flex;
+    & input{
+      width: 100%;
+      height: 30px;
+      font-size: 14px;
+    }
+    & button{
+      height: 36px;
+      font-size: 12px;
+      display: block;
+      padding: 0;
+      width: 50px;
+    }
   }
 `;
 const KeywordRanking = styled.div`
@@ -144,6 +199,12 @@ const KeywordRanking = styled.div`
   & span{
     color: #dd5850;
     font-weight: 700;
+  }
+  @media only screen and (max-width: 820px) {
+    margin: 0 15px;
+  }
+  @media only screen and (max-width: 720px) {
+    display: none;
   }
 `;
 const BottomNav = styled.div`
@@ -156,28 +217,53 @@ const BottomNav = styled.div`
   position: sticky;
   top: 0;
   z-index: 30;
-  & ul{
-    display: flex;
+  overflow-x: auto;
+  position: relative;
+  width: 100%;
+  &::-webkit-scrollbar { width: 0 !important; height:0 !important }
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+    display: block;
+    touch-action: pan-x;
+    overflow-x: auto;
+    position: relative;
+    &::-webkit-scrollbar { width: 0 !important; height:0 !important }
+    & ul{
+      width: 850px;
+      touch-action: pan-x;
+    }
   }
 `;
 const Menu = styled.li`
   padding: 10px 11px;
-        cursor: pointer;
-        position: relative;
-        &:after{
-            content: '';
-            width: 100%;
-            height: 2px;
-            background-color: #dd5850;
-            display: block;
-            position: absolute;
-            bottom:0;
-            left:0;
-            opacity: ${props=>props.activeMenu ? 1 : 0};
-        }
-        &:hover{
-          color: ${props=>props.activeMenu  ? '#dd5850' : '#dd5850'};
-        }
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  &:after{
+      content: '';
+      width: 100%;
+      height: 2px;
+      background-color: #dd5850;
+      display: block;
+      position: absolute;
+      bottom:0;
+      left:0;
+      opacity: ${props=>props.activeMenu ? 1 : 0};
+  }
+  &:hover{
+    color: ${props=>props.activeMenu  ? '#dd5850' : '#dd5850'};
+  }
+  @media only screen and (max-width: 905px) {
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+  @media only screen and (max-width: 720px) {
+    padding: 10px 11px;
+    font-size: 13px;
+    &:first-child{
+       display: none;
+    }
+  }
 `;
 const Logo = styled.span`
   display: inline-block;
@@ -187,6 +273,41 @@ const Logo = styled.span`
   margin: 5px 0;
   text-indent: -99999px;
   cursor: pointer;
+  @media only screen and (max-width: 720px) {
+    width: 64px;
+    height: 36px;
+    margin: 5px 10px 5px 0;
+  }
 `;
+
+ const MobileNav = styled.div`
+ width: 100%;
+ position: fixed;
+ left: 0;
+ bottom: 0;
+ background: white;
+ padding: 5px 0;
+ border-top: 1px solid #d9d9d9;
+ z-index: 60;
+ color: #666;
+ display: none;
+  &>ul{
+    display: flex;
+    & li{
+      width: 20%;
+      text-align: center;
+      cursor: pointer;
+      & i{
+        font-size: 20px;
+      }
+      & span{
+        font-size: 9px;
+      }
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    display: block;
+  }
+ `;
 
 export default Navigation;

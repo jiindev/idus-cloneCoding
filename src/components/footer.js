@@ -6,20 +6,20 @@ const Footer = () => (
     <FooterDiv>
         <BottomMenu>
             <ul className="center">
-                <li>이용약관</li>
-                <li>개인정보 처리방침</li>
-                <li>공지사항</li>
+                <li className="mobileActive">이용약관</li>
+                <li className="mobileActive">개인정보 처리방침</li>
+                <li className="mobileActive">공지사항</li>
                 <li>자주 묻는 질문</li>
                 <li>이벤트</li>
                 <li>입점문의</li>
-                <li>About idus</li>
+                <li className="mobileActive">About idus</li>
                 <li>인재 영입</li>
             </ul>
         </BottomMenu>
     <BrandInfo>
         <div className="center">
             <span/>
-                <div>
+            <div>
                 (주) JIINDEV<br/>
                 클론코딩 개발자 : 엄지인<br/>
                 본 사이트는 개발능력 성장 목적으로<br/>
@@ -30,33 +30,45 @@ const Footer = () => (
                     문제가 발생할 경우 메일로 연락주시면 감사하겠습니다.
                 </p>
             </div>
-        <div>
-            엄지인<br/>
-            <Contact>
-                <span>직무</span> 프론트엔드 개발자<br/>
-                <span>연락처</span> 010-2999-0531<br/>
-                <span>메일</span> jiindev@gmail.com<br/>
-                <span>홈페이지</span> jiindev.github.io
-            </Contact>
-            <p>
-                현재 프론트엔드 개발자로 구직중입니다.<br/>
-                자바스크립트와 리액트 중심으로 개발하며 제게 공부할<br/>
-                시간을 주신다면 원하시는 기술 스택에 맞출 수 있습니다.
-            </p>
-        </div>
-        <div>
-            Follow Me
-            <SnsList>
-                <li><a href="https://github.com/jiindev" target="blank">깃허브</a></li>
-                <li><a href="https://jiindev.github.io/" target="blank">개인홈</a></li>
-            </SnsList>
-            <span/> 
-            <p>
-                접속이 가능한 페이지는 메인 페이지,<br/>
-                각 메뉴 페이지, 상품페이지, 로그인페이지<br/>
-                입니다.</p>
-            <p>Copyright © 2020 jiindev All right reserved.</p>
-         </div>
+            <div>
+                엄지인<br/>
+                <Contact>
+                    <span>직무</span> 프론트엔드 개발자<br/>
+                    <span>연락처</span> 010-2999-0531<br/>
+                    <span>메일</span> jiindev@gmail.com<br/>
+                    <span>홈페이지</span> jiindev.github.io
+                </Contact>
+                <p>
+                    현재 프론트엔드 개발자로 구직중입니다.<br/>
+                    자바스크립트와 리액트 중심으로 개발하며 제게 공부할<br/>
+                    시간을 주신다면 원하시는 기술 스택에 맞출 수 있습니다.
+                </p>
+            </div>
+            <div>
+                Follow Me
+                <SnsList>
+                    <li><a href="https://github.com/jiindev" target="blank">깃허브</a></li>
+                    <li><a href="https://jiindev.github.io/" target="blank">개인홈</a></li>
+                </SnsList>
+                <span/> 
+                <p>
+                    접속이 가능한 페이지는 메인 페이지,<br/>
+                    각 메뉴 페이지, 상품페이지, 로그인페이지<br/>
+                    입니다.</p>
+                <p>Copyright © 2020 jiindev All right reserved.</p>
+            </div>
+            <div>
+                (주) JIINDEV<br/>
+                클론코딩 개발자 : 엄지인<br/>
+                본 사이트는 개발능력 성장 목적으로<br/>
+                클론코딩한 사이트입니다. <br/>
+                실제 아이디어스 사이트가 아닙니다.
+                <p>
+                    비상업적 목적으로 만들어졌습니다.<br/>
+                    문제가 발생할 경우 메일로 연락주시면 감사하겠습니다.
+                </p>
+                <p>Copyright © 2020 jiindev All right reserved.</p>
+            </div>
         </div>
     </BrandInfo>
   </FooterDiv>
@@ -67,9 +79,14 @@ const FooterDiv = styled.footer`
     font-size: 12px;
     color: #666;
     line-height: 1.5;
+    @media only screen and (max-width: 720px) {
+       background-color: #f5f5f5;
+       padding-bottom: 50px;
+    }
 `;
 const BottomMenu = styled.div`
     border-bottom: 1px solid #efefef;
+    background-color: #fff;
     & ul{
         display: flex;
         justify-content: center;
@@ -89,6 +106,20 @@ const BottomMenu = styled.div`
             }
         }
     }
+    @media only screen and (max-width: 720px) {
+        & ul{
+            justify-content: left;
+            & li{
+                display: none;
+                &.mobileActive{
+                    &:nth-child(7):after{
+                        content: none;
+                    }
+                    display: block;
+                }
+            }
+        }
+    }
 `;
 const BrandInfo = styled.div`
     padding: 40px 0 ;
@@ -104,10 +135,27 @@ const BrandInfo = styled.div`
         & div{
             flex: 1;
         }
+        & div:last-child{
+            display: none;
+        }
     }
     & p{
         font-size: 10px;
         margin-top: 10px;
+    }
+    @media only screen and (max-width: 720px) {
+        &>div{
+            flex-direction: column;
+            &>span{
+                display: none;
+            }
+            & div{
+                display: none;
+            }
+            & div:last-child{
+                display: block;
+            }
+        }
     }
 `;
 const LinkButton = styled.a`

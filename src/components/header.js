@@ -48,6 +48,9 @@ const TopHeader = styled.header`
     z-index: 40;
     font-size: 14px;
   }
+  @media only screen and (max-width: 720px) {
+    display: none;
+  }
 `;
 
 Header.propTypes = {

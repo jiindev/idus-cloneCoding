@@ -101,7 +101,7 @@ const IndexPage = () => {
   ];
   return(
     <Layout>
-    <SEO title="Home" />
+    <SEO title="- 핸드메이드, 수공예, 수제 먹거리" />
     <Banner>배너</Banner>
     <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={dummyData} link="today-recommend-product"/>
     <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={dummyData} link="liver-order-product"/>
@@ -119,6 +119,9 @@ const Banner = styled.div`
   background-color: lightpink;
   position: relative;
   z-index: 0;
+  @media only screen and (max-width: 720px) {
+    height: 288px;
+  }
 `;
 
 
