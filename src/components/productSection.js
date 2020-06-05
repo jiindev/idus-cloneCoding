@@ -1,23 +1,41 @@
-import React, {memo, useEffect, useCallback} from "react";
+import React, {memo, useEffect, useCallback, useMemo, useRef} from "react";
 import {useState} from 'react';
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import styled from 'styled-components';
 import ProductItem from './productItem';
+import Slider from "react-slick";
 
 const ProductSecion = memo(({ title, iconClass, data, link }) => {
     const [page, setPage] = useState(1);
-    const onChangePage = useCallback(pageDirection => () => {
-        if(pageDirection === 'left'){
-            if(page===1){
-                setPage(5);
-            }else setPage(page-1);
-        }else{
-            if(page===5){
-                setPage(1);
-            }else setPage(page+1);
+    const sliderRef = useRef();
+    const dataArray = useMemo(()=>(
+      data.reduce((array, number, index) => {
+        const criteria = 10;
+        const arrayIndex = Math.floor(index / criteria);
+        if (!array[arrayIndex]) {
+          array[arrayIndex] = [];
         }
-    }, [page]);
+        array[arrayIndex] = [...array[arrayIndex], number];
+        return array;
+      }, [])
+    ), [data]);
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      draggable: false,
+      afterChange: current => setPage(current+1)
+    };
+    const next = useCallback(() => {
+      sliderRef.current.slickNext();
+    }, []);
+    const previous = useCallback(() => {
+      sliderRef.current.slickPrev();
+    }, []);
 
     return(
     <Wrap>
@@ -26,15 +44,21 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
           <h3><i className={iconClass}/> {title}</h3>
           <div>
             <span><strong>{page}</strong>/5</span>
-            <button onClick={onChangePage('left')}><i className="ui_icon--arrow-left"/></button>
-            <button onClick={onChangePage('right')}><i className="ui_icon--arrow-right"/></button>
+            <button onClick={previous}><i className="ui_icon--arrow-left"/></button>
+            <button onClick={next}><i className="ui_icon--arrow-right"/></button>
           </div>
         </Title>
-        <ProductList>
-          {data && data.map((v, i)=>(
-            <ProductItem data={v} key={i}/>
+        <Slider ref={sliderRef} {...settings}>
+          {dataArray && dataArray.map((ul, i)=>(
+            <div>
+             <ProductList>
+               {ul.map((v,i)=>(
+                 <ProductItem data={v} key={i}/>
+               ))}
+             </ProductList>
+             </div>
           ))}
-        </ProductList>
+        </Slider>
         <Link to={`/main/${link}`}><MoreButton>{title} 더보기</MoreButton></Link>
       </div>
     </Wrap>

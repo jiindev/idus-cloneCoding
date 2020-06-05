@@ -98,6 +98,96 @@ const IndexPage = () => {
         star:3, 
         text:'받자마자 정말 감탄을 금치 못했...'
       }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'지수', 
+      title:'화난 고양이 제제', 
+      review:{
+        star:5, 
+        text:'너무 귀엽고 앙큼한 고양이에...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
+    },
+    {
+      thumbnailUrl: 'jeje.jpeg',
+      artist:'조바티', 
+      title:'카드지갑 미니 그린', 
+      review:{
+        star:3, 
+        text:'받자마자 정말 감탄을 금치 못했...'
+      }
     }
   ];
   return(

@@ -9,7 +9,6 @@ const Banner = () => {
     const PrevButton = ({ onClick }) => {
         return <button onClick={onClick} className="prev"><i className="icon-chevron-left"/></button>;
       }
-  
       const NextButton = ({ onClick }) => {
         return <button onClick={onClick} className="next"><i className="icon-chevron-right"/></button>;
       }

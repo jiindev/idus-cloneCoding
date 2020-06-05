@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import KeywordRanking from './keywordRanking';
 import RecommendMenu from "./recommendMenu";
 
-const Navigation = memo(({ siteTitle }) => {
+const Navigation = memo(() => {
   const path = typeof window !== 'undefined' ? window.location.pathname : '';
   return (
     <Nav>
