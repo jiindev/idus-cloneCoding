@@ -22,12 +22,12 @@ const KeywordRanking = memo(() => {
 
     return(
     <Wrap>
-        <Ranking>
+        <RankingSlider>
             <div ref={rankingDiv}>
                 <span><strong>{ranking+1}.</strong> {dummyRanking[ranking]}</span>
                 <span><strong>{ranking === 19 ? 1 : ranking+2}.</strong> {ranking === 19 ? dummyRanking[0] : dummyRanking[ranking+1]}</span>
             </div>
-        </Ranking>
+        </RankingSlider>
         <RankingPopup>
             <h4>실시간 인기 검색어</h4>
             <ul>
@@ -42,24 +42,25 @@ const KeywordRanking = memo(() => {
 
 const Wrap = styled.div`
     position: relative;
-    margin: 0 30px;
+    margin: 0 0 0 30px;
+    padding: 10px;
     &:hover{
         &>div:nth-child(2){
             display: block;
         }
     }
-    @media only screen and (max-width: 820px) {
-        margin: 0 15px;
+    @media only screen and (max-width: 830px) {
+        margin: 0 0 0 15px;
+        width: auto;
     }
     @media only screen and (max-width: 720px) {
         display: none;
     }
 `;
 
-const Ranking = styled.div`
+const RankingSlider = styled.div`
   font-size: 14px;
   color: #666;
-  
   position: relative;
   overflow: hidden;
   width: auto;
@@ -89,7 +90,7 @@ const Ranking = styled.div`
 const RankingPopup = styled.div`
     display: none;
     position: absolute;
-    top: -10px;
+    top: 0;
     left: 0;
     padding: 13px 16px;
     background: white;

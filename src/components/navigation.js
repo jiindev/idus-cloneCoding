@@ -169,7 +169,7 @@ const Search = styled.div`
   }
   @media only screen and (max-width: 820px) {
     & input{
-      width: 210px;
+      width: 200px;
     }
     & button{
       width: 60px;

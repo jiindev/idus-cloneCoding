@@ -38,6 +38,10 @@ function SEO({ description, lang, meta, title }) {
         rel: 'stylesheet', href: 'idus_iconpack.css'
       },{
         rel: 'stylesheet', href: 'fontawesome-iconpack.css'
+      },{
+        rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+      },{
+        rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
       }]}
       meta={[
         {
