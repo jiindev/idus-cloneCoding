@@ -2,10 +2,10 @@ import { Link } from "gatsby"
 import React, {memo, useState, useEffect, useRef} from "react"
 import styled from 'styled-components';
 import KeywordRanking from './keywordRanking';
+import RecommendMenu from "./recommendMenu";
 
 const Navigation = memo(({ siteTitle }) => {
   const path = typeof window !== 'undefined' ? window.location.pathname : '';
-
   return (
     <Nav>
     <TopNav>
@@ -36,21 +36,55 @@ const Navigation = memo(({ siteTitle }) => {
       </div>
     </MiddleNav>
     <BottomNav>
-      <ul>
-        <Menu>카테고리</Menu>
-        <Menu activeMenu={path==='/'}><Link to="/">홈</Link></Menu>
-        <Menu activeMenu={path==='/main/today-recommend-product'}><Link to="/main/today-recommend-product">추천 작품</Link></Menu>
-        <Menu activeMenu={path==='/main/liver-order-product'}><Link to="/main/liver-order-product">실시간 구매</Link></Menu>
-        <Menu>실시간 후기</Menu>
-        <Menu activeMenu={path==='/main/recommend-artist-product'}><Link to="/main/recommend-artist-product">작가님 추천</Link></Menu>
-        <Menu activeMenu={path==='/main/live-recommend-product'}><Link to="/main/live-recommend-product">실시간 추천</Link></Menu>
-        <Menu>인기 작품</Menu>
-        <Menu>스토리</Menu>
-        <Menu>동영상</Menu>
-        <Menu activeMenu={path==='/main/new-product'}><Link to="/main/new-product">최신 작품</Link></Menu>
-        <Menu>맞춤 추천</Menu>
-        <Menu>인기 작가</Menu>
-      </ul>
+    <RecommendMenu path={path}/>
+      <div class="menu">
+        <ul>
+          <Category>카테고리
+            <div>
+              <ul>
+                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
+                  return (
+                    <li>{v}<i className="ui_icon--arrow-right"/></li>
+                  )
+                })}
+              </ul>
+              <ul>
+                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
+                  return (
+                    <li>{v}</li>
+                  )
+                })}
+              </ul>
+              <ul>
+                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
+                  return (
+                    <li>{v}</li>
+                  )
+                })}
+              </ul>
+              <ul>
+                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
+                  return (
+                    <li>{v}</li>
+                  )
+                })}
+              </ul>
+            </div>
+          </Category>
+          <Link to="/"><Menu activeMenu={path==='/'}>홈</Menu></Link>
+          <Link to="/main/today-recommend-product"><Menu activeMenu={path==='/main/today-recommend-product'}>추천 작품</Menu></Link>
+          <Link to="/main/liver-order-product"><Menu activeMenu={path==='/main/liver-order-product'}>실시간 구매</Menu></Link>
+          <Menu>실시간 후기</Menu>
+          <Link to="/main/recommend-artist-product"><Menu activeMenu={path==='/main/recommend-artist-product'}>작가님 추천</Menu></Link>
+          <Link to="/main/live-recommend-product"><Menu activeMenu={path==='/main/live-recommend-product'}>실시간 추천</Menu></Link>
+          <Menu>인기 작품</Menu>
+          <Menu>스토리</Menu>
+          <Menu>동영상</Menu>
+          <Link to="/main/new-product"><Menu activeMenu={path==='/main/new-product'}>최신 작품</Menu></Link>
+          <Menu>맞춤 추천</Menu>
+          <Menu>인기 작가</Menu>
+        </ul>
+      </div>
     </BottomNav>
     <MobileNav>
         <ul className="myMenu">
@@ -195,29 +229,34 @@ const Search = styled.div`
 `;
 
 const BottomNav = styled.div`
-  display: flex;
-  border-top: 1px solid #d9d9d9;
-  font-size: 13px;
-  color: #666;
-  justify-content: center;
-  box-shadow: 0 4px 4px rgba(0,0,0,.2), 0 1px 0 #d9d9d9;
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  overflow-x: auto;
   position: relative;
-  width: 100%;
-  &::-webkit-scrollbar { width: 0 !important; height:0 !important }
-  @media only screen and (max-width: 720px) {
-    width: 100%;
-    display: block;
-    touch-action: pan-x;
-    overflow-x: auto;
+  &>div.menu{
+    display: flex;
+    border-top: 1px solid #d9d9d9;
+    font-size: 13px;
+    color: #666;
+    justify-content: center;
+    box-shadow: 0 4px 4px rgba(0,0,0,.2), 0 1px 0 #d9d9d9;
+    box-sizing: border-box;
+    z-index: 30;
     position: relative;
+    width: 100%;
     &::-webkit-scrollbar { width: 0 !important; height:0 !important }
-    & ul{
-      width: 850px;
+  }
+  
+  @media only screen and (max-width: 720px) {
+    &>div.menu{
+      width: 100%;
+      display: block;
       touch-action: pan-x;
+      overflow-x: auto;
+      position: relative;
+      &::-webkit-scrollbar { width: 0 !important; height:0 !important }
+      & ul{
+        width: 850px;
+        touch-action: pan-x;
+        padding-right: 30px;
+      }
     }
   }
 `;
@@ -247,9 +286,67 @@ const Menu = styled.li`
   @media only screen and (max-width: 720px) {
     padding: 10px 11px;
     font-size: 13px;
-    &:first-child{
-       display: none;
+  }
+`;
+const Category = styled(Menu)`
+  position: relative;
+  & div{
+    position: absolute;
+    display: none;
+    z-index: 50;
+    background-color: white;
+    top: 33px;
+    left: -50px;
+    border: 1px solid #d9d9d9;
+    flex-direction: row;
+    width: 848px;
+    & ul{
+      display: flex;
+      flex-direction: column;
+      color: #333;
+      width: 25%;
+      margin: 20px 0;
+      
+      border-right: 1px solid #d9d9d9;
+      &:last-child{
+        border: none;
+      }
+      & li{
+        padding: 5px 10px;
+        margin: 5px 20px;
+        font-size: 12px;
+        box-sizing: border-box;
+        position: relative;
+        & i{
+          font-size: 10px;
+          position: absolute;
+          right: 8px;
+          top: 6px;
+          display: none;
+        }
+        &:hover{
+          background-color: #feeaed;
+          & i{
+            display: inline;
+          }
+        }
+        
+      }
     }
+  }
+  &:hover div{
+    display: flex;
+  }
+  @media only screen and (max-width: 1056px) {
+    position: static;
+    & div{
+      width: 100vw;
+      left: 0;
+      top: 32px;
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    display: none;
   }
 `;
 const Logo = styled.span`

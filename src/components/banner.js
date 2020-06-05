@@ -64,6 +64,9 @@ const Wrap = styled.div`
     }
     & i{
     }
+    & .slick-slide *{
+        outline: none;
+    }
     @media only screen and (max-width: 720px) {
         & button{
             display: none;
@@ -87,12 +90,13 @@ const SlideNum = styled.div`
     }
 `;
 
-const SlideImg = styled.img`
+const SlideImg = styled.div`
     width: 100%;
     height: 480px;
     padding-left: 100%;
     box-sizing:border-box;
     background: ${props=>`url('/banner/${props.index}.jpg') no-repeat center center / cover;`};
+    outline: none;
     @media only screen and (max-width: 720px) {
         background: ${props=>`url('/banner/mobile_${props.index}.jpg') no-repeat center center / cover;`};
     }
