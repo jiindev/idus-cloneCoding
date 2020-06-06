@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `아이디어스(클론코딩) `,
+    title: `제이디어스 `,
     description: `아이디어스 클론 코딩 사이트입니다.`,
     author: `jiindev`,
   },

@@ -9,7 +9,7 @@ const RecommendMenu = memo(({path}) => {
         setShowRecommendMenu(!showRecommendMenu);
     }, [showRecommendMenu]);
     return (
-  <Wrap show={showRecommendMenu}>
+      <Wrap show={showRecommendMenu}>
             <button onClick={onClickShowRecommendMenu}><i className="ui_icon--arrow-down"/></button>
             <div>
               <h4>추천 메뉴</h4>
@@ -28,7 +28,7 @@ const RecommendMenu = memo(({path}) => {
                 <RMenu><i className="ui_icon--thumb"/><span>인기작가</span></RMenu>
               </ul>
             </div>
-  </Wrap>
+      </Wrap>
     );
 });
 
@@ -46,6 +46,7 @@ const Wrap = styled.div`
     line-height: 32px;
     box-sizing: border-box;
     border: 1px solid #d9d9d9;
+    border-right: 0;
     border-bottom: 0;
     display: none;
     outline: none;
@@ -55,7 +56,7 @@ const Wrap = styled.div`
       transition: .2s all ease;
       transform: ${props=>props.show? 'rotate(180deg)' : 'rotate(0deg)'};
       transform-origin: center 60%;
-      color: ${props=>props.show? '#dd5850' : '#666'}
+      color: ${props=>props.show? '#5283db' : '#666'}
     }
   }
   & div{
@@ -76,7 +77,7 @@ const Wrap = styled.div`
     height: 35px;
     box-sizing: border-box;
     border: 1px solid #d9d9d9;
-    color: #dd5850;
+    color: #5283db;
     font-size: 14px;
     text-align: center;
     line-height: 34px;
@@ -110,7 +111,7 @@ const Wrap = styled.div`
   }
 `;
 const RMenu = styled.li`
-  color: ${props=>props.activeMenu ? '#dd5850' : '#666'};
+  color: ${props=>props.activeMenu ? '#5283db' : '#666'};
 `;
 
 RecommendMenu.propTypes = {

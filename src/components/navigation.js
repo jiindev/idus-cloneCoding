@@ -3,12 +3,15 @@ import React, {memo, useState, useEffect, useRef, useCallback} from "react"
 import styled from 'styled-components';
 import KeywordRanking from './keywordRanking';
 import RecommendMenu from "./recommendMenu";
+import MobileKeywordRanking from "./mobileKeywordRanking";
 
 const Navigation = memo(() => {
   const path = typeof window !== 'undefined' ? window.location.pathname : '';
+  const [searchFocus, setSearchFocus] = useState(false);
   const bottomNavRef = useRef();
   const middleNavRef = useRef();
   const bottomHeightRef = useRef(); 
+  const SearchRef = useRef();
   const onScroll = useCallback(() => {
     if(window.scrollY > middleNavRef.current.offsetTop+middleNavRef.current.clientHeight){
       bottomNavRef.current.style.position = 'fixed';
@@ -19,18 +22,26 @@ const Navigation = memo(() => {
     }
   }, []);
   useEffect(()=>{
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
+    if(path!=='/product'){
+      window.addEventListener('scroll', onScroll);
+      return () => {
+        window.removeEventListener('scroll', onScroll);
+      }
     }
   }, []);
+  const onFocusSearch = () => {
+    setSearchFocus(true);
+  }
+  const onBlurSearch = () => {
+    setSearchFocus(false);
+  }
 
 
   return (
     <Nav>
     <TopNav>
       <div className="center">
-        <span>본 사이트는 클론코딩 사이트입니다. 정식 사이트가 아닙니다.</span>
+        <span>본 사이트는 아이디어스의 클론코딩 사이트입니다. 정식 사이트가 아닙니다.</span>
         <ul>
           <li>로그인</li>
           <li>회원가입</li>
@@ -44,8 +55,8 @@ const Navigation = memo(() => {
         <ul className="pageMenu">
           <li>작품</li>
         </ul>
-        <Search>
-          <input type="text" name="search" id="search" placeholder="작품, 작가 검색"/>
+        <Search className={searchFocus ? "focus" : ""}>
+          <input type="text" name="search" id="search" placeholder="작품, 작가 검색" onFocus={onFocusSearch} onBlur={onBlurSearch}/>
           <button>검색</button>
         </Search>
         <KeywordRanking/>
@@ -54,6 +65,7 @@ const Navigation = memo(() => {
           <li><button><i className="ui_icon--cart-new"/><br/><span>장바구니</span></button></li>
         </ul>
       </div>
+      {searchFocus && <MobileKeywordRanking/>}
     </MiddleNav>
     <BottomNav ref={bottomNavRef}>
     <RecommendMenu path={path}/>
@@ -145,9 +157,11 @@ const TopNav = styled.div`
   }
 `;
 const MiddleNav = styled.div`
-  &>div{
+  &>div:first-child{
     display: flex;
     align-items: center;
+    position: relative;
+    padding: 0;
   }
   & ul{
     display: flex;
@@ -197,7 +211,7 @@ const MiddleNav = styled.div`
 const Search = styled.div`
   & input{
     border-radius: 3px 0 0 3px;
-    border: 3px solid #dd5850;
+    border: 3px solid #5283db;
     height: 48px;
     width: 250px;
     box-sizing: border-box;
@@ -211,7 +225,7 @@ const Search = styled.div`
   }
   & button{
     font-size: 16px;
-    background-color: #dd5850;
+    background-color: #5283db;
     height: 48px;
     border: none;
     border-radius: 0 3px 3px 0;
@@ -234,6 +248,7 @@ const Search = styled.div`
   @media only screen and (max-width: 720px) {
     flex:1;
     display: flex;
+    width: auto;
     & input{
       width: 100%;
       height: 30px;
@@ -245,6 +260,12 @@ const Search = styled.div`
       display: block;
       padding: 0;
       width: 50px;
+    }
+    &.focus{
+      position: absolute;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 10px;
     }
   }
 `;
@@ -295,7 +316,7 @@ const Menu = styled.li`
       content: '';
       width: 100%;
       height: 2px;
-      background-color: #dd5850;
+      background-color: #5283db;
       display: block;
       position: absolute;
       bottom:0;
@@ -303,9 +324,9 @@ const Menu = styled.li`
       opacity: ${props=>props.activeMenu ? 1 : 0};
   }
   &:hover{
-    color: ${props=>props.activeMenu  ? '#dd5850' : '#dd5850'};
+    color: ${props=>props.activeMenu  ? '#5283db' : '#5283db'};
   }
-  @media only screen and (max-width: 905px) {
+  @media only screen and (max-width: 920px) {
     padding: 10px 5px;
     font-size: 12px;
   }
@@ -351,7 +372,7 @@ const Category = styled(Menu)`
           display: none;
         }
         &:hover{
-          background-color: #feeaed;
+          background-color: #dfe9f7;
           & i{
             display: inline;
           }
@@ -380,13 +401,13 @@ const Logo = styled.span`
   width: 116px;
   height: 68px;
   background: url('/idus-logo.svg') no-repeat center center / contain;
-  margin: 5px 0;
+  margin: 5px 0 5px 10px;
   text-indent: -99999px;
   cursor: pointer;
   @media only screen and (max-width: 720px) {
     width: 64px;
     height: 36px;
-    margin: 5px 10px 5px 0;
+    margin: 5px 10px;
   }
 `;
 

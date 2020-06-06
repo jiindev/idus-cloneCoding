@@ -75,7 +75,7 @@ const Footer = () => (
 )
 
 const FooterDiv = styled.footer`
-    border-top: 3px solid #dd5850;
+    border-top: 3px solid #5283db;
     font-size: 12px;
     color: #666;
     line-height: 1.5;

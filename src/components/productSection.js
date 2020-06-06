@@ -11,8 +11,8 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
     const sliderRef = useRef();
     const dataArray = useMemo(()=>(
       data.reduce((array, number, index) => {
-        const criteria = 10;
-        const arrayIndex = Math.floor(index / criteria);
+        const limit = 10;
+        const arrayIndex = Math.floor(index / limit);
         if (!array[arrayIndex]) {
           array[arrayIndex] = [];
         }

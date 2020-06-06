@@ -79,7 +79,7 @@ const RankingSlider = styled.div`
     }
   }
   & strong{
-    color: #dd5850;
+    color: #5283db;
     font-weight: 700;
   }
   & span{
@@ -87,7 +87,7 @@ const RankingSlider = styled.div`
   }
 `;
 
-const RankingPopup = styled.div`
+export const RankingPopup = styled.div`
     display: none;
     position: absolute;
     top: 0;
@@ -123,7 +123,7 @@ const RankingPopup = styled.div`
                 font-weight: bold;
             }
             &:hover{
-                color: #dd5850;
+                color: #5283db;
                 & span{
                     text-decoration: underline;
                 }
