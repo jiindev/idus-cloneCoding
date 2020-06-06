@@ -1,16 +1,36 @@
 import { Link } from "gatsby"
-import React, {memo, useState, useEffect, useRef} from "react"
+import React, {memo, useState, useEffect, useRef, useCallback} from "react"
 import styled from 'styled-components';
 import KeywordRanking from './keywordRanking';
 import RecommendMenu from "./recommendMenu";
 
 const Navigation = memo(() => {
   const path = typeof window !== 'undefined' ? window.location.pathname : '';
+  const bottomNavRef = useRef();
+  const middleNavRef = useRef();
+  const bottomHeightRef = useRef(); 
+  const onScroll = useCallback(() => {
+    if(window.scrollY > middleNavRef.current.offsetTop+middleNavRef.current.clientHeight){
+      bottomNavRef.current.style.position = 'fixed';
+      bottomHeightRef.current.style.height = '34px';
+    }else{
+      bottomNavRef.current.style.position = 'relative';
+      bottomHeightRef.current.style.height = '0px';
+    }
+  }, []);
+  useEffect(()=>{
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    }
+  }, []);
+
+
   return (
     <Nav>
     <TopNav>
       <div className="center">
-        <span>아이디어스 앱 설치하기</span>
+        <span>본 사이트는 클론코딩 사이트입니다. 정식 사이트가 아닙니다.</span>
         <ul>
           <li>로그인</li>
           <li>회원가입</li>
@@ -18,7 +38,7 @@ const Navigation = memo(() => {
         </ul>
       </div>
     </TopNav>
-    <MiddleNav>
+    <MiddleNav ref={middleNavRef}>
       <div className="center">
         <Link to="/"><Logo>로고</Logo></Link>
         <ul className="pageMenu">
@@ -35,7 +55,7 @@ const Navigation = memo(() => {
         </ul>
       </div>
     </MiddleNav>
-    <BottomNav>
+    <BottomNav ref={bottomNavRef}>
     <RecommendMenu path={path}/>
       <div class="menu">
         <ul>
@@ -86,6 +106,7 @@ const Navigation = memo(() => {
         </ul>
       </div>
     </BottomNav>
+    <div ref={bottomHeightRef}></div>
     <MobileNav>
         <ul className="myMenu">
           <li><i className="ui_icon--myinfo"/><br/><span>작품</span></li>
@@ -230,6 +251,11 @@ const Search = styled.div`
 
 const BottomNav = styled.div`
   position: relative;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: white;
   &>div.menu{
     display: flex;
     border-top: 1px solid #d9d9d9;

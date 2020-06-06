@@ -49,6 +49,7 @@ const Wrap = styled.div`
     border-bottom: 0;
     display: none;
     outline: none;
+    cursor: pointer;
     & i{
       display: inline-block;
       transition: .2s all ease;

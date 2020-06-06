@@ -67,6 +67,9 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
 
 const Wrap = styled.div`
   padding: 40px 0;
+  & .slick-slide *{
+    outline: none;
+  }
 `;
 export const ProductList = styled.ul`
     display: flex;
