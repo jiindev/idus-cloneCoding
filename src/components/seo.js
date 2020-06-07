@@ -32,8 +32,7 @@ function SEO({ description, lang, meta, title }) {
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`${site.siteMetadata.title} %s`}
+      title={`${site.siteMetadata.title} ${title}`}
       link={[{
         rel: 'stylesheet', href: 'idus_iconpack.css'
       },{
@@ -50,7 +49,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: `${site.siteMetadata.title} ${title}`,
         },
         {
           property: `og:description`,
