@@ -11,24 +11,32 @@ const Navigation = memo(() => {
   const bottomNavRef = useRef();
   const middleNavRef = useRef();
   const bottomHeightRef = useRef(); 
+  const goTopButtonRef = useRef();
 
   const onScroll = useCallback(() => {
     if(window.scrollY > middleNavRef.current.offsetTop+middleNavRef.current.clientHeight){
-      bottomNavRef.current.style.position = 'fixed';
-      bottomHeightRef.current.style.height = '34px';
+      if(path!=='/product'){
+        bottomNavRef.current.style.position = 'fixed';
+        bottomHeightRef.current.style.height = '34px';
+      }
+      goTopButtonRef.current.classList.add('show');
     }else{
-      bottomNavRef.current.style.position = 'relative';
-      bottomHeightRef.current.style.height = '0px';
+      if(path!=='/product'){
+        bottomNavRef.current.style.position = 'relative';
+        bottomHeightRef.current.style.height = '0px';
+      }
+      goTopButtonRef.current.classList.remove('show');
     }
   }, []);
   useEffect(()=>{
-    if(path!=='/product'){
       window.addEventListener('scroll', onScroll);
       return () => {
         window.removeEventListener('scroll', onScroll);
       }
-    }
   }, []);
+  const onClickGoTop = () => {
+    window.scrollTo(0, 0);
+  }
   const onFocusSearch = () => {
     setSearchFocus(true);
   }
@@ -39,6 +47,7 @@ const Navigation = memo(() => {
 
   return (
     <Nav>
+      <GoTopButton ref={goTopButtonRef} onClick={onClickGoTop}><i className="icon-angle-up"/><span>TOP</span></GoTopButton>
     <TopNav>
       <div className="center">
         <span>본 사이트는 아이디어스의 클론코딩 사이트입니다. 정식 사이트가 아닙니다.</span>
@@ -119,6 +128,7 @@ const Navigation = memo(() => {
       </div>
     </BottomNav>
     <div ref={bottomHeightRef}></div>
+    
     {path !== '/product' && <MobileNav>
         <ul className="myMenu">
           <li><i className="ui_icon--myinfo"/><br/><span>작품</span></li>
@@ -136,6 +146,46 @@ const Navigation = memo(() => {
 const Nav = styled.nav`
   width: 100%;
 `;
+
+const GoTopButton = styled.span`
+  width: 40px;
+  height: 38px;
+  text-align: center;
+  z-index: 50;
+  background-color: #5283db;
+  color: white;
+  position: fixed;
+  bottom: 236px;
+  right: 0;
+  font-size: 10px;
+  display: none;
+  & *{
+    display: block;
+  }
+  & i{
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &.show{
+    display: inline-block;
+  }
+  @media only screen and (max-width: 720px) {
+    height: 40px;
+    border-radius: 40px;
+    border: 1px solid #acacac;
+    background: rgba(255,255,255,0.8);
+    color: #acacac;
+    bottom: 70px;
+    right: 10px;
+    & i{
+      line-height: 34px;
+    }
+    & span{
+      display: none;
+    }
+  }
+`;
+
 const TopNav = styled.div`
   background-color: #f5f5f5;
   color: #666;

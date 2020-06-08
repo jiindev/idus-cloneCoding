@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useCallback, useMemo, useRef} from "react";
+import React, {memo, useEffect, useCallback, useMemo, useRef, forwardRef} from "react";
 import {useState} from 'react';
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import ProductItem from './productItem';
 import Slider from "react-slick";
 
-const ProductSecion = memo(({ title, iconClass, data, link }) => {
+const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) => {
     const [page, setPage] = useState(1);
     const sliderRef = useRef();
     const dataArray = useMemo(()=>(
@@ -39,7 +39,7 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
     }, []);
 
     return(
-    <Wrap>
+    <Wrap ref={ref}>
       <div className="center">
         <Title>
           <h3><i className={iconClass}/> {title}</h3>
@@ -64,7 +64,7 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
       </div>
     </Wrap>
     );
-});
+}));
 
 const Wrap = styled.div`
   padding: 40px 0;

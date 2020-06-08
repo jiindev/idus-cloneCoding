@@ -49,7 +49,6 @@ const Layout = ({ children }) => {
     <>
       <GlobalStyle/>
       <Navigation/>
-      {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
         <main>{children}</main>
         <Footer/>
     </>
