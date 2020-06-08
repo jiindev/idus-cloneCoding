@@ -11,7 +11,7 @@ const Navigation = memo(() => {
   const bottomNavRef = useRef();
   const middleNavRef = useRef();
   const bottomHeightRef = useRef(); 
-  const SearchRef = useRef();
+
   const onScroll = useCallback(() => {
     if(window.scrollY > middleNavRef.current.offsetTop+middleNavRef.current.clientHeight){
       bottomNavRef.current.style.position = 'fixed';
@@ -67,8 +67,8 @@ const Navigation = memo(() => {
       </div>
       {searchFocus && <MobileKeywordRanking/>}
     </MiddleNav>
-    <BottomNav ref={bottomNavRef}>
-    <RecommendMenu path={path}/>
+    <BottomNav ref={bottomNavRef} show={path !== '/product'}>
+      <RecommendMenu path={path}/>
       <div class="menu">
         <ul>
           <Category>카테고리
@@ -119,7 +119,7 @@ const Navigation = memo(() => {
       </div>
     </BottomNav>
     <div ref={bottomHeightRef}></div>
-    <MobileNav>
+    {path !== '/product' && <MobileNav>
         <ul className="myMenu">
           <li><i className="ui_icon--myinfo"/><br/><span>작품</span></li>
           <li><i className="ui_icon--class"/><br/><span>금손 클래스</span></li>
@@ -127,7 +127,7 @@ const Navigation = memo(() => {
           <li><i className="ui_icon--category"/><br/><span>카테고리</span></li>
           <li><i className="ui_icon--myinfo"/><br/><span>내 정보</span></li>
         </ul>
-    </MobileNav>
+    </MobileNav>}
   </Nav>
   );
 });
@@ -292,6 +292,7 @@ const BottomNav = styled.div`
   }
   
   @media only screen and (max-width: 720px) {
+    display: ${props=>props.show ? 'block' : 'none'};
     &>div.menu{
       width: 100%;
       display: block;
@@ -324,7 +325,7 @@ const Menu = styled.li`
       opacity: ${props=>props.activeMenu ? 1 : 0};
   }
   &:hover{
-    color: ${props=>props.activeMenu  ? '#5283db' : '#5283db'};
+    color: #5283db;
   }
   @media only screen and (max-width: 920px) {
     padding: 10px 5px;

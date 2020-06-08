@@ -4,26 +4,28 @@ import PropTypes from "prop-types"
 import styled from 'styled-components';
 import Star from "./star"
 
-const ProductItem = memo(({ data }) => (
-    <ProductLi>
+const ProductItem = memo(({ data, noReview, artistSection }) => (
+    <ProductLi artistSection={artistSection}>
         <div>
-        <Thumbnail thumbnailUrl={data && data.thumbnailUrl}><span/></Thumbnail>
+        <Thumbnail thumbnailUrl={data && data.thumbnailUrl} artistSection={artistSection}><span/></Thumbnail>
         <Text>
             <div className="title">
-            <span>{data && data.artist}</span>
-            <h4>{data && data.title}</h4>
+              <span>{data && data.artist}</span>
+              <h4>{data && data.title}</h4>
             </div>
-            <div className="review">
-            <Star starNum={data && data.review.star}/>
-            {data && data.review.text}
-            </div>
+            { !noReview &&
+                <div className="review">
+                  <Star starNum={data && data.review.star}/>
+                  {data && data.review.text}
+                </div>
+            }
         </Text>
         </div>
     </ProductLi>
 ));
 
 const ProductLi = styled.li`
-      width: 20%;
+      width: ${props=>props.artistSection ? '25%' : '20%'};
       font-size: 14px;
       &>div{
         margin: 8px;
@@ -33,7 +35,7 @@ const ProductLi = styled.li`
         background-color: #f8f9fb;
       }
       @media only screen and (max-width: 1056px) {
-        width: 33.33%;
+        width: ${props=>props.artistSection ? '25%' : '33.3%'};
       }
       @media only screen and (max-width: 720px) {
         width: 50%;
@@ -45,8 +47,8 @@ const ProductLi = styled.li`
 
 const Thumbnail = styled.div`
     width: 100%;
-    height: 200px;
     overflow: hidden;
+    height: ${props=>props.artistSection ? '150px' : '200px'};
   & span{
     display: block;
     width: 100%;
@@ -57,6 +59,9 @@ const Thumbnail = styled.div`
   &:hover span{
     transform: scale(1.1);
   }
+  @media only screen and (max-width: 720px) {
+    height: 200px;
+  }
 `;
 const Text = styled.div`
   color: #333;
@@ -66,15 +71,18 @@ const Text = styled.div`
   }
   & div.title{
     height: 96px;
-    border-bottom: 1px solid #d9d9d9;
     & span{
       font-size: 12px;
       color: #999;
       padding-bottom: 3px;
       display: inline-block;
     }
+    & h4{
+      color: #333;
+    }
   }
   & div.review{
+    border-top: 1px solid #d9d9d9;
     font-size: 12px;
     color: #666;
   }
@@ -82,6 +90,8 @@ const Text = styled.div`
 
 ProductItem.propTypes = {
   data: PropTypes.object,
+  noReview: PropTypes.bool,
+  artistSection: PropTypes.bool
 }
 
 ProductItem.defaultProps = {
@@ -94,6 +104,8 @@ ProductItem.defaultProps = {
       text:'너무 귀엽고 앙큼한 고양이에...'
     }
   },
+  noReview: false,
+  artistSection: false
 }
 
 export default ProductItem

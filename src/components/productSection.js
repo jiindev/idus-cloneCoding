@@ -28,6 +28,7 @@ const ProductSecion = memo(({ title, iconClass, data, link }) => {
       slidesToScroll: 1,
       arrows: false,
       draggable: false,
+      touchMove: false,
       afterChange: current => setPage(current+1)
     };
     const next = useCallback(() => {
@@ -143,7 +144,7 @@ const MoreButton = styled.button`
     transition: all .2s ease;
     outline: none;
     &:hover{
-        background: #f5f5f5;;
+        background: #f5f5f5;
     }
     @media only screen and (max-width: 720px) {
       width: 100%;
