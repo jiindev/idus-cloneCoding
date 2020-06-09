@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import styled from 'styled-components';
 import ProductItem from './productItem';
 import Slider from "react-slick";
+import {getDummyDataRandomly} from '../data/data';
 
 const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) => {
     const [page, setPage] = useState(1);

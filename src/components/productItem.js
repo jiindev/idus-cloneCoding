@@ -7,6 +7,7 @@ import Star from "./star"
 const ProductItem = memo(({ data, noReview, artistSection }) => (
     <ProductLi artistSection={artistSection}>
         <div>
+        <Link to="/product" state={{data}}>
         <Thumbnail thumbnailUrl={data && data.thumbnailUrl} artistSection={artistSection}><span/></Thumbnail>
         <Text>
             <div className="title">
@@ -20,6 +21,7 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
                 </div>
             }
         </Text>
+        </Link>
         </div>
     </ProductLi>
 ));

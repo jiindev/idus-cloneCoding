@@ -5,8 +5,10 @@ import styled from 'styled-components';
 import Slider from "react-slick";
 import Star from "../components/star";
 import ProductItem from "../components/productItem";
+import {getDummyDataRandomly} from '../data/data';
 
-const ProductDetail = () => {
+const ProductDetail = ({location}) => {
+    const data = location.state ?  location.state.data : {gg:'gg'};
     const buyRef = useRef();
     const sliderRef = useRef();
     const tabMenuRef = useRef();

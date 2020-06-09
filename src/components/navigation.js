@@ -159,6 +159,7 @@ const GoTopButton = styled.span`
   right: 0;
   font-size: 10px;
   display: none;
+  cursor: pointer;
   & *{
     display: block;
   }

@@ -6,190 +6,9 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import ProductSecion from "../components/productSection";
 import Banner from "../components/banner";
+import {getDummyDataRandomly} from '../data/data';
 
 const IndexPage = () => {
-  const dummyData = [
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'지수', 
-      title:'화난 고양이 제제', 
-      review:{
-        star:5, 
-        text:'너무 귀엽고 앙큼한 고양이에...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'지수', 
-      title:'화난 고양이 제제', 
-      review:{
-        star:5, 
-        text:'너무 귀엽고 앙큼한 고양이에...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    },
-    {
-      thumbnailUrl: 'jeje.jpeg',
-      artist:'조바티', 
-      title:'카드지갑 미니 그린', 
-      review:{
-        star:3, 
-        text:'받자마자 정말 감탄을 금치 못했...'
-      }
-    }
-  ];
   const sideNavMenu = useRef();
   const section1Ref = useRef();
   const section2Ref = useRef();
@@ -246,12 +65,12 @@ const IndexPage = () => {
         <li onClick={onClickNav(section6Ref)}><i className="ui_icon--thunder"/><span>최신 작품</span></li>
       </ul>
     </SideNav>
-      <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={dummyData} link="today-recommend-product" ref={section1Ref}/>
-      <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={dummyData} link="liver-order-product" ref={section2Ref}/>
-      <ProductSecion title="실시간 후기" iconClass="ui_icon--pencil" data={dummyData} ref={section3Ref}/>
-      <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={dummyData} link="recommend-artist-product" ref={section4Ref}/>
-      <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={dummyData} link="live-recommend-product" ref={section5Ref}/>
-      <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={dummyData} link="new-product" ref={section6Ref}/>
+      <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={getDummyDataRandomly(50)} link="today-recommend-product" ref={section1Ref}/>
+      <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={getDummyDataRandomly(50)} link="liver-order-product" ref={section2Ref}/>
+      <ProductSecion title="실시간 후기" iconClass="ui_icon--pencil" data={getDummyDataRandomly(50)} ref={section3Ref}/>
+      <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={getDummyDataRandomly(50)} link="recommend-artist-product" ref={section4Ref}/>
+      <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={getDummyDataRandomly(50)} link="live-recommend-product" ref={section5Ref}/>
+      <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={getDummyDataRandomly(50)} link="new-product" ref={section6Ref}/>
     </div>
   </Layout>
   );
