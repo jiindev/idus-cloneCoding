@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/idus-cloneCoding",
   siteMetadata: {
     title: `제이디어스 `,
     description: `아이디어스 클론 코딩 사이트입니다.`,
