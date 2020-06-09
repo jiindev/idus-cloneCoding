@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import Slider from "react-slick";
 import Star from "../components/star";
 import ProductItem from "../components/productItem";
-import {getDummyDataRandomly, getArtistProducts} from '../data/data';
+import {getDummyDataRandomly, getArtistProducts, getDefaultDummy} from '../data/data';
 
 const ProductDetail = ({location}) => {
-    const data = location.state ? location.state.data : {gg:'gg'};
+    const data = location.state ? location.state.data : getDefaultDummy();
     const artistProducts = getArtistProducts(data.artist, data.id);
     const buyRef = useRef();
     const sliderRef = useRef();
@@ -48,8 +48,8 @@ const ProductDetail = ({location}) => {
             tabMenuRef.current.querySelector('li:nth-child(1)').classList.add('active');
         }
       }, []);
+
       useEffect(()=>{
-          console.log(artistProducts);
           window.addEventListener('scroll', onScroll);
           return () => {
             window.removeEventListener('scroll', onScroll);
@@ -96,6 +96,7 @@ const ProductDetail = ({location}) => {
       const tabMove = useCallback((tabRef) => () => {
         window.scrollTo(0, tabRef.current.offsetTop+121);
       }, []);
+      
     return (
   <Layout>
     <SEO title="| 오늘의 추천작품" />
@@ -1085,7 +1086,7 @@ const ArtistInfo = styled.div`
             }
         }
     }
-    @media only screen and (max-width: 720px) {
+    @media only screen and (max-width: 1056px) {
         &>div{
             flex-direction: column;
         }

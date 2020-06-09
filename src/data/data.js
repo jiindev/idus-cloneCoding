@@ -564,3 +564,7 @@ const dummyData = [
     const dummyCopy = [...dummyData];
     return dummyCopy.filter((v)=>(v.artist === artistName && v.id !== productId)).slice(0,4);
   }
+
+  export const getDefaultDummy = () => {
+    return dummyData[35];
+  };
