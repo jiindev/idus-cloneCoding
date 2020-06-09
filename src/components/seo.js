@@ -55,6 +55,9 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `twitter:card`,
           content: `summary`,
+        }, 
+        {
+          property: 'og:image', content: '/site_thumbnail.jpg'
         },
         {
           name: `twitter:creator`,
@@ -62,7 +65,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: `${site.siteMetadata.title} ${title}`,
         },
         {
           name: `twitter:description`,

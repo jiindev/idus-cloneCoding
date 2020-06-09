@@ -49,7 +49,7 @@ const IndexPage = () => {
 
   return(
     <Layout>
-    <SEO title="- 핸드메이드, 수공예, 수제 먹거리" />
+    <SEO title=" - 아이디어스 클론코딩 사이트" />
     <Banner/>
     
     <div className="center">
