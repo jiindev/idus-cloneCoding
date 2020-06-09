@@ -1,5 +1,4 @@
 import React, {memo, useEffect, useCallback, useState} from "react";
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import Header from "./header";
 import {ProductList} from './productSection';
@@ -11,7 +10,7 @@ const ProductPage = memo(({ title, description, bannerBackground }) => {
   const [dummyData, setDummyData] = useState(getDummyDataRandomly(20));
 
   const onScroll = useCallback(() => {
-    if(window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 100){
+    if(window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
       setTimeout(()=>{
         setDummyData([...dummyData].concat(getDummyDataRandomly(20)));
       }, 500);
@@ -46,6 +45,7 @@ const Wrap = styled.div`
 ProductPage.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
+  bannerBackground: PropTypes.array,
 }
 
 export default ProductPage

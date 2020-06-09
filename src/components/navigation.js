@@ -12,6 +12,7 @@ const Navigation = memo(() => {
   const middleNavRef = useRef();
   const bottomHeightRef = useRef(); 
   const goTopButtonRef = useRef();
+  const searchInputRef = useRef();
 
   const onScroll = useCallback(() => {
     if(window.scrollY > middleNavRef.current.offsetTop+middleNavRef.current.clientHeight){
@@ -28,21 +29,29 @@ const Navigation = memo(() => {
       goTopButtonRef.current.classList.remove('show');
     }
   }, []);
+
   useEffect(()=>{
       window.addEventListener('scroll', onScroll);
       return () => {
         window.removeEventListener('scroll', onScroll);
       }
   }, []);
-  const onClickGoTop = () => {
+
+  const onClickGoTop = useCallback(() => {
     window.scrollTo(0, 0);
-  }
-  const onFocusSearch = () => {
+  }, []);
+
+  const onFocusSearch = useCallback(() => {
     setSearchFocus(true);
-  }
-  const onBlurSearch = () => {
+  }, []);
+
+  const onBlurSearch = useCallback(() => {
     setSearchFocus(false);
-  }
+  }, []);
+
+  const onClickSearch = useCallback(() => {
+    searchInputRef.current.focus();
+  }, []);
 
 
   return (
@@ -65,7 +74,7 @@ const Navigation = memo(() => {
           <li>작품</li>
         </ul>
         <Search className={searchFocus ? "focus" : ""}>
-          <input type="text" name="search" id="search" placeholder="작품, 작가 검색" onFocus={onFocusSearch} onBlur={onBlurSearch}/>
+          <input type="text" name="search" id="search" placeholder="작품, 작가 검색" onFocus={onFocusSearch} onBlur={onBlurSearch} ref={searchInputRef}/>
           <button>검색</button>
         </Search>
         <KeywordRanking/>
@@ -80,60 +89,43 @@ const Navigation = memo(() => {
       <RecommendMenu path={path}/>
       <div class="menu">
         <ul>
-          <Category>카테고리
+          <Category className="clickable">카테고리
             <div>
-              <ul>
-                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
+                {[['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'],
+                ['캔들, 디퓨저, 방향제', '향수, 화장품, 뷰티', '반지', '귀걸이', '목걸이', '팔찌', '그 외 액세서리', '비누, 천연비누', '섬유, 의류, 퀼트', '패션잡화'], 
+                ['인테리어 소품', '도자기', '주방, 생활', '가구', '지갑 (지폐, 카드, 동전, 명함', '가방, 파우치', '시계', '남성 수제화', '여성 수제화', '인형, 장난감'],
+                ['반려동품 용품', '페인팅, 캐리커쳐, 캘리', '육아, 아동', '파인아트', '공예', '기타']].map((v, i)=>{
                   return (
-                    <li>{v}<i className="ui_icon--arrow-right"/></li>
+                    <ul>
+                      {v.map((v2, i2)=>{
+                        return <li>{v2}<i className="ui_icon--arrow-right"/></li>
+                      })}
+                    </ul>
                   )
                 })}
-              </ul>
-              <ul>
-                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
-                  return (
-                    <li>{v}</li>
-                  )
-                })}
-              </ul>
-              <ul>
-                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
-                  return (
-                    <li>{v}</li>
-                  )
-                })}
-              </ul>
-              <ul>
-                {['음료 (커피, 차 등)', '디저트, 베이커리, 떡', '농축수산물', '수제 반찬', '그 외 수제 먹거리', '전통주', '문구, 팬시', '휴대폰 케이스', '전자기기 관련', '꽃 (생화, 드라이, 다육 등)'].map((v, i)=>{
-                  return (
-                    <li>{v}</li>
-                  )
-                })}
-              </ul>
             </div>
           </Category>
-          <Link to="/"><Menu activeMenu={path==='/'}>홈</Menu></Link>
-          <Link to="/main/today-recommend-product"><Menu activeMenu={path==='/main/today-recommend-product'}>추천 작품</Menu></Link>
-          <Link to="/main/liver-order-product"><Menu activeMenu={path==='/main/liver-order-product'}>실시간 구매</Menu></Link>
+          <Link to="/"><Menu activeMenu={path==='/'} className="clickable">홈</Menu></Link>
+          <Link to="/main/today-recommend-product"><Menu activeMenu={path==='/main/today-recommend-product'} className="clickable">추천 작품</Menu></Link>
+          <Link to="/main/liver-order-product"><Menu activeMenu={path==='/main/liver-order-product'} className="clickable">실시간 구매</Menu></Link>
           <Menu>실시간 후기</Menu>
-          <Link to="/main/recommend-artist-product"><Menu activeMenu={path==='/main/recommend-artist-product'}>작가님 추천</Menu></Link>
-          <Link to="/main/live-recommend-product"><Menu activeMenu={path==='/main/live-recommend-product'}>실시간 추천</Menu></Link>
+          <Link to="/main/recommend-artist-product"><Menu activeMenu={path==='/main/recommend-artist-product'} className="clickable">작가님 추천</Menu></Link>
+          <Link to="/main/live-recommend-product"><Menu activeMenu={path==='/main/live-recommend-product'} className="clickable">실시간 추천</Menu></Link>
           <Menu>인기 작품</Menu>
           <Menu>스토리</Menu>
           <Menu>동영상</Menu>
-          <Link to="/main/new-product"><Menu activeMenu={path==='/main/new-product'}>최신 작품</Menu></Link>
+          <Link to="/main/new-product"><Menu activeMenu={path==='/main/new-product'} className="clickable">최신 작품</Menu></Link>
           <Menu>맞춤 추천</Menu>
           <Menu>인기 작가</Menu>
         </ul>
       </div>
     </BottomNav>
     <div ref={bottomHeightRef}></div>
-    
     {path !== '/product' && <MobileNav>
         <ul className="myMenu">
-          <li><i className="ui_icon--myinfo"/><br/><span>작품</span></li>
+          <li className="clickable"><Link to="/"><i className="ui_icon--myinfo"/><br/><span>작품</span></Link></li>
           <li><i className="ui_icon--class"/><br/><span>금손 클래스</span></li>
-          <li><i className="ui_icon--search"/><br/><span>검색</span></li>
+          <li className="clickable" onClick={onClickSearch}><i className="ui_icon--search"/><br/><span>검색</span></li>
           <li><i className="ui_icon--category"/><br/><span>카테고리</span></li>
           <li><i className="ui_icon--myinfo"/><br/><span>내 정보</span></li>
         </ul>
@@ -231,7 +223,6 @@ const MiddleNav = styled.div`
         border: none;
         font-size: 10px;
         margin: 0 8px;
-        cursor: pointer;
         outline: none;
         & i{
           font-size: 24px;
@@ -284,12 +275,12 @@ const Search = styled.div`
     color: white;
     font-weight: 500;
     outline: none;
-    cursor: pointer;
     box-sizing: border-box;
   }
   @media only screen and (max-width: 820px) {
     & input{
       width: 200px;
+      cursor: pointer;
     }
     & button{
       width: 60px;
@@ -332,7 +323,7 @@ const BottomNav = styled.div`
     display: flex;
     border-top: 1px solid #d9d9d9;
     font-size: 13px;
-    color: #666;
+    color: #bbb;
     justify-content: center;
     box-shadow: 0 4px 4px rgba(0,0,0,.2), 0 1px 0 #d9d9d9;
     box-sizing: border-box;
@@ -361,7 +352,6 @@ const BottomNav = styled.div`
 `;
 const Menu = styled.li`
   padding: 10px 11px;
-  cursor: pointer;
   position: relative;
   display: inline-block;
   &:after{
@@ -375,9 +365,14 @@ const Menu = styled.li`
       left:0;
       opacity: ${props=>props.activeMenu ? 1 : 0};
   }
-  &:hover{
-    color: #5283db;
+  &.clickable{
+    color: #666;
+    cursor: pointer;
+    &:hover{
+      color: #5283db;
+    }
   }
+  
   @media only screen and (max-width: 920px) {
     padding: 10px 5px;
     font-size: 12px;
@@ -399,13 +394,13 @@ const Category = styled(Menu)`
     border: 1px solid #d9d9d9;
     flex-direction: row;
     width: 848px;
+    cursor: default;
     & ul{
       display: flex;
       flex-direction: column;
       color: #333;
       width: 25%;
       margin: 20px 0;
-      
       border-right: 1px solid #d9d9d9;
       &:last-child{
         border: none;
@@ -472,14 +467,21 @@ const Logo = styled.span`
  padding: 5px 0;
  border-top: 1px solid #d9d9d9;
  z-index: 60;
- color: #666;
  display: none;
   &>ul{
     display: flex;
     & li{
       width: 20%;
       text-align: center;
-      cursor: pointer;
+      color: #bbb;
+      &.clickable{
+        color: #666;
+        cursor: pointer;
+      }
+      & a{
+        display: inline-block;
+        width: 100%;
+      }
       & i{
         font-size: 20px;
       }

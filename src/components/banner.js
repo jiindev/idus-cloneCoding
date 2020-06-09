@@ -1,17 +1,16 @@
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, {useState} from "react"
+import React, {useState, useCallback} from "react"
 import styled from 'styled-components';
 import Slider from "react-slick";
 
 const Banner = () => {
     const [slidePage, setSlidePage] = useState(1);
-    const PrevButton = ({ onClick }) => {
+    const PrevButton = useCallback(({ onClick }) => {
         return <button onClick={onClick} className="prev"><i className="icon-chevron-left"/></button>;
-      }
-      const NextButton = ({ onClick }) => {
+    }, []);
+    const NextButton = useCallback(({ onClick }) => {
         return <button onClick={onClick} className="next"><i className="icon-chevron-right"/></button>;
-      }
+    }, []);
     const settings = {
         dots: false,
         infinite: true,
@@ -22,7 +21,7 @@ const Banner = () => {
         prevArrow: <PrevButton />,
         nextArrow: <NextButton />,
         afterChange: current => setSlidePage(current+1)
-      };
+    };
       
 
     return (
@@ -86,6 +85,10 @@ const SlideNum = styled.div`
     transition: all .2s ease;
     & span{
         color: white;
+    }
+    @media only screen and (max-width: 720px) {
+        bottom: 20px;
+        right: 20px;
     }
 `;
 

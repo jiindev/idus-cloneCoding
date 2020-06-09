@@ -14,16 +14,16 @@ const RecommendMenu = memo(({path}) => {
             <div>
               <h4>추천 메뉴</h4>
               <ul>
-                <RMenu activeMenu={path==='/'}><Link to="/"><i className="ui_icon--home"/><span>홈</span></Link></RMenu>
-                <RMenu activeMenu={path==='/main/today-recommend-product'}><Link to="/main/today-recommend-product"><i className="ui_icon--medal"/><span>추천 작품</span></Link></RMenu>
-                <RMenu activeMenu={path==='/main/liver-order-product'}><Link to="/main/liver-order-product"><i className="ui_icon--current-list"/><span>실시간 구매</span></Link></RMenu>
+                <RMenu activeMenu={path==='/'} className="clickable"><Link to="/"><i className="ui_icon--home"/><span>홈</span></Link></RMenu>
+                <RMenu activeMenu={path==='/main/today-recommend-product'} className="clickable"><Link to="/main/today-recommend-product"><i className="ui_icon--medal"/><span>추천 작품</span></Link></RMenu>
+                <RMenu activeMenu={path==='/main/liver-order-product'} className="clickable"><Link to="/main/liver-order-product"><i className="ui_icon--current-list"/><span>실시간 구매</span></Link></RMenu>
                 <RMenu><i className="ui_icon--pencil"/><span>실시간 후기</span></RMenu>
-                <RMenu activeMenu={path==='/main/recommend-artist-product'}><Link to="/main/recommend-artist-product"><i className="ui_icon--advert"/><span>작가님 추천</span></Link></RMenu>
-                <RMenu activeMenu={path==='/main/live-recommend-product'}><Link to="/main/live-recommend-product"><i className="ui_icon--advert"/><span>실시간 추천</span></Link></RMenu>
+                <RMenu activeMenu={path==='/main/recommend-artist-product'} className="clickable"><Link to="/main/recommend-artist-product"><i className="ui_icon--advert"/><span>작가님 추천</span></Link></RMenu>
+                <RMenu activeMenu={path==='/main/live-recommend-product'} className="clickable"><Link to="/main/live-recommend-product"><i className="ui_icon--advert"/><span>실시간 추천</span></Link></RMenu>
                 <RMenu><i className="ui_icon--fire"/><span>인기 작품</span></RMenu>
                 <RMenu><i className="ui_icon--story"/><span>스토리</span></RMenu>
                 <RMenu><i className="ui_icon--video"/><span>동영상</span></RMenu>
-                <RMenu activeMenu={path==='/main/new-product'}><Link to="/main/new-product"><i className="ui_icon--thunder"/><span>최신 작품</span></Link></RMenu>
+                <RMenu activeMenu={path==='/main/new-product'} className="clickable"><Link to="/main/new-product"><i className="ui_icon--thunder"/><span>최신 작품</span></Link></RMenu>
                 <RMenu><i className="ui_icon--gift"/><span>맞춤 추천</span></RMenu>
                 <RMenu><i className="ui_icon--thumb"/><span>인기작가</span></RMenu>
               </ul>
@@ -111,7 +111,11 @@ const Wrap = styled.div`
   }
 `;
 const RMenu = styled.li`
-  color: ${props=>props.activeMenu ? '#5283db' : '#666'};
+  color: #bbb;
+  &.clickable {
+    color: ${props=>props.activeMenu ? '#5283db' : '#666'};
+    cursor: pointer;
+  }
 `;
 
 RecommendMenu.propTypes = {
@@ -119,7 +123,7 @@ RecommendMenu.propTypes = {
 }
 
 RecommendMenu.defaultProps = {
-    path: '',
+    path: '/',
 }
 
 export default RecommendMenu

@@ -551,6 +551,7 @@ const dummyData = [
     }
   ];
 
+  //원하는 갯수의 더미데이터 가져오기 (랜덤출력)
   export const getDummyDataRandomly = (dataSize)  => {
     const dummyCopy = [...dummyData];
     for (let i = dummyCopy.length - 1; i > 0; i--) {
@@ -560,11 +561,13 @@ const dummyData = [
     return dummyCopy.slice(0,dataSize);
   };
 
+  //해당 아티스트의 다른 상품정보 가져오기
   export const getArtistProducts = (artistName, productId) => {
     const dummyCopy = [...dummyData];
     return dummyCopy.filter((v)=>(v.artist === artistName && v.id !== productId)).slice(0,4);
   }
 
+  //product페이지에 전달된 데이터 값이 없을 경우 디폴트 데이터 출력
   export const getDefaultDummy = () => {
     return dummyData[35];
   };

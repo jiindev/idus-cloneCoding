@@ -1,5 +1,3 @@
-
-import PropTypes from "prop-types"
 import React, {memo} from "react"
 import styled  from 'styled-components';
 import {RankingPopup} from './keywordRanking';
@@ -38,13 +36,5 @@ const MobileRankingPopup = styled(RankingPopup)`
             margin-left: -10px;
     }
 `;
-
-MobileKeywordRanking.propTypes = {
-    starNum: PropTypes.number,
-}
-
-MobileKeywordRanking.defaultProps = {
-    starNum: 0,
-}
 
 export default MobileKeywordRanking

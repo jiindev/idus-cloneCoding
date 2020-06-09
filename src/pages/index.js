@@ -1,8 +1,6 @@
 import React, {useRef, useCallback, useEffect} from "react"
-import { Link } from "gatsby"
-import styled, {createGlobalStyle} from 'styled-components';
+import styled from 'styled-components';
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import ProductSecion from "../components/productSection";
 import Banner from "../components/banner";

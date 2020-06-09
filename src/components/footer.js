@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React from "react"
 import styled from 'styled-components';
 
@@ -92,7 +91,6 @@ const BottomMenu = styled.div`
         justify-content: center;
         & li{
             padding: 10px 15px;
-            cursor: pointer;
             position: relative;
             &:after{
                 content: ' | ';

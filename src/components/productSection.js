@@ -5,7 +5,6 @@ import PropTypes from "prop-types"
 import styled from 'styled-components';
 import ProductItem from './productItem';
 import Slider from "react-slick";
-import {getDummyDataRandomly} from '../data/data';
 
 const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) => {
     const [page, setPage] = useState(1);
@@ -127,7 +126,7 @@ const Title = styled.div`
   }
   @media only screen and (max-width: 720px) {
     & h3{
-      border: none;
+      font-size: 16px;
     }
   }
 `;
@@ -152,6 +151,7 @@ const MoreButton = styled.button`
       width: 100%;
       font-size: 14px;
       border: 1px solid #d9d9d9;
+      margin: 10px auto 0 auto;
     }
 `;
 

@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types"
 import React, {memo, useState, useEffect, useRef} from "react"
 import styled  from 'styled-components';
@@ -10,13 +9,13 @@ const KeywordRanking = memo(() => {
 
     useEffect(() => {
         setTimeout(()=>{
-        rankingDiv.current && rankingDiv.current.classList.add("moving");
-        setTimeout(()=>{
-            rankingDiv.current && rankingDiv.current.classList.remove("moving");
-            if(ranking===19){
-                setRanking(0);
-            }else setRanking(ranking+1);
-        }, 500);
+            rankingDiv.current && rankingDiv.current.classList.add("moving");
+            setTimeout(()=>{
+                rankingDiv.current && rankingDiv.current.classList.remove("moving");
+                if(ranking===19){
+                    setRanking(0);
+                }else setRanking(ranking+1);
+            }, 500);
         }, 4000);
     }, [ranking, rankingDiv]);
 
@@ -118,7 +117,6 @@ export const RankingPopup = styled.div`
             width: 50%;
             padding: 7px 3px;
             box-sizing: border-box;
-            cursor: pointer;
             & strong{
                 font-weight: bold;
             }
@@ -142,12 +140,5 @@ export const RankingPopup = styled.div`
     }
 `;
 
-KeywordRanking.propTypes = {
-    starNum: PropTypes.number,
-}
-
-KeywordRanking.defaultProps = {
-    starNum: 0,
-}
 
 export default KeywordRanking

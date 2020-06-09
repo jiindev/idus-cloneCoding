@@ -9,7 +9,11 @@ import {getDummyDataRandomly, getArtistProducts, getDefaultDummy} from '../data/
 
 const ProductDetail = ({location}) => {
     const data = location.state ? location.state.data : getDefaultDummy();
-    const artistProducts = getArtistProducts(data.artist, data.id);
+    const [artistProducts, setArtistProducts] = useState(getArtistProducts(data.artist, data.id));
+    const [otherProducts, setOtherProducts] = useState(getDummyDataRandomly(10));
+    const [categoryProducts, setCategoryProducts] = useState(getDummyDataRandomly(10));
+    const [clickBuy, setClickBuy] = useState(false);
+    
     const buyRef = useRef();
     const sliderRef = useRef();
     const tabMenuRef = useRef();
@@ -21,7 +25,7 @@ const ProductDetail = ({location}) => {
     const detailInfo1 = useRef();
     const detailInfo2 = useRef();
     const detailInfo3 = useRef();
-    const [clickBuy, setClickBuy] = useState(false);
+    
     
     const onScroll = useCallback(() => {
         //우측 구매정보 sticky
@@ -89,14 +93,14 @@ const ProductDetail = ({location}) => {
           },
       };
 
-      const onShowDetailInfo = (detailInfoRef) => () => {
+      const onShowDetailInfo = useCallback((detailInfoRef) => () => {
         detailInfoRef.current.classList.toggle('shown');
-      }
+      }, []);
 
       const tabMove = useCallback((tabRef) => () => {
         window.scrollTo(0, tabRef.current.offsetTop+121);
       }, []);
-      
+
     return (
   <Layout>
     <SEO title="| 오늘의 추천작품" />
@@ -189,7 +193,18 @@ const ProductDetail = ({location}) => {
                         <li onClick={tabMove(tab4Ref)}>댓글</li>
                     </TabMenu>
                     <Description ref={tab1Ref}>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur eveniet provident repellendus, sunt numquam deserunt harum suscipit odit excepturi officiis quidem id, nesciunt aut quas. Unde sunt esse nulla molestias.
+                        본 사이트는 아이디어스의 클론 사이트로써,<br/>
+                        UI 구현 능력의 향상 목적으로 진행된 사이트입니다.<br/>
+                        실제 서비스는 동작하지 않으며,<br/>
+                        메인페이지, 서브 화면 6페이지, 상품 페이지가 구현되었습니다.<br/><br/>
+                        사이트의 UI소스와 메인 배너는 아이디어스 사이트에서 가져왔습니다.<br/>
+                        '소소화방'의 캐리커쳐 상품 썸네일 이미지는 <br/>제가 아이디어스에서 셀러활동을 했을 적에<br/>
+                        직접 그려 판매했던 캐리커쳐 이미지들을 사용했으며, <br/>
+                        그 외 상품 썸네일 이미지는 unsplash 이미지를 사용했습니다.<br/><br/>
+                        비 영리적인 목적으로 만들어진 사이트이나<br/>
+                        만약 문제가 발생할 경우, jiindev@gmail.com으로 연락 주시면<br/>
+                        빠르게 대처하도록 하겠습니다.
+
                     </Description>
                     <CategoryKeyword>
                         <dl>
@@ -366,7 +381,7 @@ const ProductDetail = ({location}) => {
                     <div>   
                         <SectionTitle>이 작품과 함께 많이 본 다른 작품</SectionTitle>
                         <ul>
-                            {getDummyDataRandomly(10).map((v, i)=>{
+                            {otherProducts.map((v, i)=>{
                                 return <ProductItem noReview={true} data={v}/>
                             })}
                         </ul>
@@ -374,7 +389,7 @@ const ProductDetail = ({location}) => {
                     <div>
                         <SectionTitle>{data.category} 인기 작품<button>더보기</button></SectionTitle>
                         <ul>
-                            {getDummyDataRandomly(10).map((v, i)=>{
+                            {categoryProducts.map((v, i)=>{
                                 return <ProductItem noReview={true} data={v}/>
                             })}
                         </ul>
@@ -401,6 +416,9 @@ const Dim = styled.div`
     height: 100vh;
     z-index: 35;
     display: ${props=>props.show? 'block' : 'none'};
+    @media only screen and (min-width: 721px) {
+        display: none;
+    }
 `;
 const SectionTitle = styled.h4`
     font-weight: bold;
@@ -507,8 +525,12 @@ const TabMenu = styled.ul`
 `;
 const Description = styled.div`
     text-align: center;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 24px;
     padding: 50px 0;
+    @media only screen and (max-width: 720px) {
+        padding: 0 0 50px 0;
+    }
 `;
 const CategoryKeyword = styled.div`
     text-align: center;
@@ -990,6 +1012,9 @@ const BuyButtons = styled.div`
             & .bookmark{
                 display: inline-block;
                 width: 10%;
+            }
+            & .buy, & .npay{
+                cursor: pointer;
             }
         }
         & .option{
