@@ -22,7 +22,7 @@ const ProductPage = memo(({ title, description, bannerBackground }) => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     }
-  }, [dummyData]);
+  }, [onScroll]);
 
   return(
     <Wrap>
@@ -30,7 +30,7 @@ const ProductPage = memo(({ title, description, bannerBackground }) => {
       <div className="center">
           <ProductList>
               {dummyData.map((v, i)=>{
-                  return <ProductItem data={v}/>
+                  return <ProductItem data={v} key={i}/>
               })}
           </ProductList>
       </div>
@@ -45,7 +45,7 @@ const Wrap = styled.div`
 ProductPage.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  bannerBackground: PropTypes.array,
+  bannerBackground: PropTypes.object,
 }
 
 export default ProductPage

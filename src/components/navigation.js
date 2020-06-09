@@ -28,14 +28,14 @@ const Navigation = memo(() => {
       }
       goTopButtonRef.current.classList.remove('show');
     }
-  }, []);
+  }, [path]);
 
   useEffect(()=>{
       window.addEventListener('scroll', onScroll);
       return () => {
         window.removeEventListener('scroll', onScroll);
       }
-  }, []);
+  }, [onScroll]);
 
   const onClickGoTop = useCallback(() => {
     window.scrollTo(0, 0);
@@ -87,7 +87,7 @@ const Navigation = memo(() => {
     </MiddleNav>
     <BottomNav ref={bottomNavRef} show={path !== '/product'}>
       <RecommendMenu path={path}/>
-      <div class="menu">
+      <div className="menu">
         <ul>
           <Category className="clickable">카테고리
             <div>
@@ -96,9 +96,9 @@ const Navigation = memo(() => {
                 ['인테리어 소품', '도자기', '주방, 생활', '가구', '지갑 (지폐, 카드, 동전, 명함', '가방, 파우치', '시계', '남성 수제화', '여성 수제화', '인형, 장난감'],
                 ['반려동품 용품', '페인팅, 캐리커쳐, 캘리', '육아, 아동', '파인아트', '공예', '기타']].map((v, i)=>{
                   return (
-                    <ul>
+                    <ul key={i}>
                       {v.map((v2, i2)=>{
-                        return <li>{v2}<i className="ui_icon--arrow-right"/></li>
+                        return <li key={i2}>{v2}<i className="ui_icon--arrow-right"/></li>
                       })}
                     </ul>
                   )

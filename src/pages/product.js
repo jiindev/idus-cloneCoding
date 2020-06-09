@@ -1,4 +1,4 @@
-import React, {memo, useState, useEffect, useRef, useCallback} from "react"
+import React, {memo, useState, useEffect, useRef, useCallback, useMemo} from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from 'styled-components';
@@ -7,11 +7,11 @@ import Star from "../components/star";
 import ProductItem from "../components/productItem";
 import {getDummyDataRandomly, getArtistProducts, getDefaultDummy} from '../data/data';
 
-const ProductDetail = ({location}) => {
+const ProductDetail = memo(({location}) => {
     const data = location.state ? location.state.data : getDefaultDummy();
-    const [artistProducts, setArtistProducts] = useState(getArtistProducts(data.artist, data.id));
-    const [otherProducts, setOtherProducts] = useState(getDummyDataRandomly(10));
-    const [categoryProducts, setCategoryProducts] = useState(getDummyDataRandomly(10));
+    const artistProducts = useMemo(()=>(getArtistProducts(data.artist, data.id)),[data]);
+    const otherProducts = useMemo(()=>(getDummyDataRandomly(10)),[data]);
+    const categoryProducts = useMemo(()=>(getDummyDataRandomly(10)),[data]);
     const [clickBuy, setClickBuy] = useState(false);
     
     const buyRef = useRef();
@@ -58,7 +58,7 @@ const ProductDetail = ({location}) => {
           return () => {
             window.removeEventListener('scroll', onScroll);
           }
-      }, []);
+      }, [onScroll]);
 
       const next = useCallback(() => {
         sliderRef.current.slickNext();
@@ -80,13 +80,13 @@ const ProductDetail = ({location}) => {
             if(i===0){
                 return (
                     <a className="dotImage">
-                      <img src={`/thumbnail/${data.thumbnailUrl}`} width="100%" />
+                      <img src={`/thumbnail/${data.thumbnailUrl}`} width="100%" alt={`${i} small image`}/>
                     </a>
                   );
             }else {
                 return (
                     <a className="dotImage">
-                      <img src={`/thumbnail/dummyThumbnail_${i}.jpg`} width="100%" />
+                      <img src={`/thumbnail/dummyThumbnail_${i}.jpg`} width="100%" alt={`${i} small image`}/>
                     </a>
                   );
             }
@@ -113,13 +113,13 @@ const ProductDetail = ({location}) => {
                         <button className="next" onClick={next}><i className="icon-angle-right"/></button>
                         <Slider {...settings} ref={sliderRef}>
                             <div>
-                                <img src={`/thumbnail/${data.thumbnailUrl}`} width="100%"/>
+                                <img src={`/thumbnail/${data.thumbnailUrl}`} alt={`product image 1`} width="100%"/>
                             </div>
                             <div>
-                                <img src="/thumbnail/dummyThumbnail_1.jpg" width="100%"/>
+                                <img src="/thumbnail/dummyThumbnail_1.jpg" alt={`product image 2`} width="100%"/>
                             </div>
                             <div>
-                                <img src="/thumbnail/dummyThumbnail_2.jpg" width="100%"/>
+                                <img src="/thumbnail/dummyThumbnail_2.jpg" alt={`product image 3`} width="100%"/>
                             </div>
                         </Slider>
                     </ProductImage>
@@ -129,7 +129,7 @@ const ProductDetail = ({location}) => {
                             <TopInfo>
                                 <span className="category">{data.category}</span>
                                 <h3>{data.title}</h3>
-                                <div class="artist">
+                                <div className="artist">
                                     <span>{data.artist} <i className="ui_icon--arrow-right"/></span>
                                     <button>메시지로 문의</button>
                                 </div>
@@ -213,7 +213,7 @@ const ProductDetail = ({location}) => {
                         </dl>
                         <ul>
                             {['생일선물', '깜짝선물', '커플선물', '커플', '우정', '주말반짝할인', '선물추천', '우정선물', '주문제작', '부모님선물'].map((v, i)=>{
-                                return <li>#{v}</li>
+                                return <li key={i}>#{v}</li>
                             })}
                         </ul>
                     </CategoryKeyword>
@@ -356,7 +356,7 @@ const ProductDetail = ({location}) => {
                         <SectionTitle>판매중인 다른 제품들 <button>더보기</button></SectionTitle>
                         <ul>
                             {artistProducts.map((v, i)=>{
-                                return <ProductItem noReview={true} artistSection={true} data={v}/>
+                                return <ProductItem noReview={true} artistSection={true} data={v} key={i}/>
                             })}
                         </ul>
                     </div>                    
@@ -382,7 +382,7 @@ const ProductDetail = ({location}) => {
                         <SectionTitle>이 작품과 함께 많이 본 다른 작품</SectionTitle>
                         <ul>
                             {otherProducts.map((v, i)=>{
-                                return <ProductItem noReview={true} data={v}/>
+                                return <ProductItem noReview={true} data={v} key={i}/>
                             })}
                         </ul>
                     </div>
@@ -390,7 +390,7 @@ const ProductDetail = ({location}) => {
                         <SectionTitle>{data.category} 인기 작품<button>더보기</button></SectionTitle>
                         <ul>
                             {categoryProducts.map((v, i)=>{
-                                return <ProductItem noReview={true} data={v}/>
+                                return <ProductItem noReview={true} data={v} key={i}/>
                             })}
                         </ul>
                     </div>
@@ -399,7 +399,7 @@ const ProductDetail = ({location}) => {
     </Wrap>
   </Layout>
     );
-};
+});
 
 const Wrap = styled.div`
     padding: 30px 0;

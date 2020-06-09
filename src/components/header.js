@@ -53,11 +53,9 @@ const TopHeader = styled.header`
 `;
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  bannerBackground: PropTypes.object,
 }
 
 export default Header

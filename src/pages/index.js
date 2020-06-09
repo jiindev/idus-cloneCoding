@@ -45,7 +45,7 @@ const IndexPage = () => {
       return () => {
         window.removeEventListener('scroll', onScroll);
       }
-  }, []);
+  }, [onScroll]);
 
   return(
     <Layout>

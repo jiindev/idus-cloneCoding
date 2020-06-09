@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, {memo, useState, useEffect, useRef, useCallback} from "react"
+import React, {memo, useState, useCallback} from "react"
 import styled  from 'styled-components';
 import { Link } from "gatsby"
 

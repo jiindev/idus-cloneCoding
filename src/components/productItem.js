@@ -17,7 +17,7 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
             { !noReview &&
                 <div className="review">
                   <Star starNum={data && data.review.star}/>
-                  <span class="text">{data && data.review.text}</span>
+                  <span className="text">{data && data.review.text}</span>
                 </div>
             }
         </Text>

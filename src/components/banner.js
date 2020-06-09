@@ -30,7 +30,7 @@ const Banner = () => {
         <Slider {...settings}>
             {
                 Array(10).fill(' ').map((v, i) => 
-                <div>
+                <div key={i}>
                     <SlideImg index={i+1}/>
                 </div>)
             }

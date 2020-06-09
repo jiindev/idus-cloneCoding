@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useCallback, useMemo, useRef, forwardRef} from "react";
+import React, {memo, useCallback, useMemo, useRef, forwardRef} from "react";
 import {useState} from 'react';
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
@@ -51,7 +51,7 @@ const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) =>
         </Title>
         <Slider ref={sliderRef} {...settings}>
           {dataArray && dataArray.map((ul, i)=>(
-            <div>
+            <div key={i}>
              <ProductList>
                {ul.map((v,i)=>(
                  <ProductItem data={v} key={i}/>
