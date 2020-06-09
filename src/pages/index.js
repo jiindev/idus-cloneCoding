@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useEffect} from "react"
+import React, {useRef, useCallback, useEffect, useMemo} from "react"
 import styled from 'styled-components';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,6 +14,12 @@ const IndexPage = () => {
   const section4Ref = useRef();
   const section5Ref = useRef();
   const section6Ref = useRef();
+  const section1Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section2Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section3Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section4Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section5Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section6Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
 
   const onClickNav = useCallback( (sectionRef) => () => {
     window.scrollTo(0, sectionRef.current.offsetTop+1);
@@ -63,12 +69,12 @@ const IndexPage = () => {
         <li onClick={onClickNav(section6Ref)}><i className="ui_icon--thunder"/><span>최신 작품</span></li>
       </ul>
     </SideNav>
-      <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={getDummyDataRandomly(50)} link="today-recommend-product" ref={section1Ref}/>
-      <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={getDummyDataRandomly(50)} link="liver-order-product" ref={section2Ref}/>
-      <ProductSecion title="실시간 후기" iconClass="ui_icon--pencil" data={getDummyDataRandomly(50)} ref={section3Ref}/>
-      <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={getDummyDataRandomly(50)} link="recommend-artist-product" ref={section4Ref}/>
-      <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={getDummyDataRandomly(50)} link="live-recommend-product" ref={section5Ref}/>
-      <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={getDummyDataRandomly(50)} link="new-product" ref={section6Ref}/>
+      <ProductSecion title="오늘의 추천작품" iconClass="ui_icon--medal" data={section1Products} link="today-recommend-product" ref={section1Ref}/>
+      <ProductSecion title="실시간 구매작품" iconClass="ui_icon--current-list" data={section2Products} link="liver-order-product" ref={section2Ref}/>
+      <ProductSecion title="실시간 후기" iconClass="ui_icon--pencil" data={section3Products} ref={section3Ref}/>
+      <ProductSecion title="작가님 추천작품" iconClass="ui_icon--advert" data={section4Products} link="recommend-artist-product" ref={section4Ref}/>
+      <ProductSecion title="실시간 추천작품" iconClass="ui_icon--advert" data={section5Products} link="live-recommend-product" ref={section5Ref}/>
+      <ProductSecion title="최신 작품" iconClass="ui_icon--thunder" data={section6Products} link="new-product" ref={section6Ref}/>
     </div>
   </Layout>
   );
