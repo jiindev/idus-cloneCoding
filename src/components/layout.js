@@ -49,8 +49,8 @@ const Layout = ({ children }) => {
     <>
       <GlobalStyle/>
       <Navigation/>
-        <main>{children}</main>
-        <Footer/>
+      <main>{children}</main>
+      <Footer/>
     </>
   )
 }

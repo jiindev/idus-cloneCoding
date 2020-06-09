@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import Slider from "react-slick";
 import Star from "../components/star";
 import ProductItem from "../components/productItem";
-import {getDummyDataRandomly} from '../data/data';
+import {getDummyDataRandomly, getArtistProducts} from '../data/data';
 
 const ProductDetail = ({location}) => {
-    const data = location.state ?  location.state.data : {gg:'gg'};
+    const data = location.state ? location.state.data : {gg:'gg'};
+    const artistProducts = getArtistProducts(data.artist, data.id);
     const buyRef = useRef();
     const sliderRef = useRef();
     const tabMenuRef = useRef();
@@ -48,6 +49,7 @@ const ProductDetail = ({location}) => {
         }
       }, []);
       useEffect(()=>{
+          console.log(artistProducts);
           window.addEventListener('scroll', onScroll);
           return () => {
             window.removeEventListener('scroll', onScroll);
@@ -71,11 +73,19 @@ const ProductDetail = ({location}) => {
         draggable: true,
         dots: true,
         customPaging: function(i) {
-            return (
-              <a className="dotImage">
-                <img src={`/thumbnail/red.jpg`} width="100%" />
-              </a>
-            );
+            if(i===0){
+                return (
+                    <a className="dotImage">
+                      <img src={`/thumbnail/${data.thumbnailUrl}`} width="100%" />
+                    </a>
+                  );
+            }else {
+                return (
+                    <a className="dotImage">
+                      <img src={`/thumbnail/dummyThumbnail_${i}.jpg`} width="100%" />
+                    </a>
+                  );
+            }
           },
       };
 
@@ -98,13 +108,13 @@ const ProductDetail = ({location}) => {
                         <button className="next" onClick={next}><i className="icon-angle-right"/></button>
                         <Slider {...settings} ref={sliderRef}>
                             <div>
-                                <img src="/thumbnail/red.jpg" width="100%"/>
+                                <img src={`/thumbnail/${data.thumbnailUrl}`} width="100%"/>
                             </div>
                             <div>
-                                <img src="/banner/mobile_2.jpg" width="100%"/>
+                                <img src="/thumbnail/dummyThumbnail_1.jpg" width="100%"/>
                             </div>
                             <div>
-                                <img src="/banner/mobile_3.jpg" width="100%"/>
+                                <img src="/thumbnail/dummyThumbnail_2.jpg" width="100%"/>
                             </div>
                         </Slider>
                     </ProductImage>
@@ -112,10 +122,10 @@ const ProductDetail = ({location}) => {
                     <BuyDiv ref={buyRef}>
                         <div>
                             <TopInfo>
-                                <span className="category">휴대폰 케이스</span>
-                                <h3>[주말 반짝 할인] 대리석 필기체 커스텀 케이스</h3>
+                                <span className="category">{data.category}</span>
+                                <h3>{data.title}</h3>
                                 <div class="artist">
-                                    <span>엠제이케이스 <i className="ui_icon--arrow-right"/></span>
+                                    <span>{data.artist} <i className="ui_icon--arrow-right"/></span>
                                     <button>메시지로 문의</button>
                                 </div>
                                 <div className="price">
@@ -183,10 +193,10 @@ const ProductDetail = ({location}) => {
                     <CategoryKeyword>
                         <dl>
                             <dt>Category &amp; Keyword</dt> 
-                            <dd>휴대폰 케이스</dd>
+                            <dd>{data.category}</dd>
                         </dl>
                         <ul>
-                            {['대리석', '대리석케이스', '마블케이스', '폰케이스', '우정', '커플', '커플케이스', '우정케이스', '주말반짝할인', '생일선물'].map((v, i)=>{
+                            {['생일선물', '깜짝선물', '커플선물', '커플', '우정', '주말반짝할인', '선물추천', '우정선물', '주문제작', '부모님선물'].map((v, i)=>{
                                 return <li>#{v}</li>
                             })}
                         </ul>
@@ -199,19 +209,19 @@ const ProductDetail = ({location}) => {
                                     <tbody>
                                         <tr>
                                             <th>종류</th>
-                                            <td>핸드폰케이스</td>
+                                            <td>{data.category}</td>
                                         </tr>
                                         <tr>
                                             <th>소재</th>
-                                            <td>하드케이스:폴리카보네이트 / 터프,카드터프케이스:폴리카보네이트+TPU(우레탄)</td>
+                                            <td>신입개발자의 열정</td>
                                         </tr>
                                         <tr>
                                             <th>사이즈</th>
-                                            <td>핸드폰 기종에 따라 사이즈가 다릅니다.</td>
+                                            <td>주문 옵션에 따라 사이즈가 상이합니다.</td>
                                         </tr>
                                         <tr>
                                             <th>제조자 / 제조국</th>
-                                            <td>엠제이케이스/MADE IN KOREA</td>
+                                            <td>jiindev/MADE IN KOREA</td>
                                         </tr>
                                         <tr>
                                             <th>취급시 주의사항</th>
@@ -220,6 +230,49 @@ const ProductDetail = ({location}) => {
                                         <tr>
                                             <th>품질보증기준</th>
                                             <td>메세지를 보내주시면 안내 드리겠습니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </DetailInfoLi>
+                            <DetailInfoLi ref={detailInfo2}>
+                                <h4 onClick={onShowDetailInfo(detailInfo2)}>판매 작가 정보<i className="icon-angle-down"/></h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>대표자명</th>
+                                            <td>{data.artist}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>이메일</th>
+                                            <td>jiindev@gmail.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>깃허브</th>
+                                            <td>https://github.com/jiindev</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </DetailInfoLi>
+                            <DetailInfoLi ref={detailInfo3} className="shown">
+                                <h4 onClick={onShowDetailInfo(detailInfo3)}>배송 / 교환 / 환불<i className="icon-angle-down"/></h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>배송비</th>
+                                            <td>기본료 : <strong>3,500원</strong><br/>
+                                                배송비 무료 조건 : <strong>40,000원</strong><br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>제작 / 배송</th>
+                                            <td><strong>5일 이내</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <th>교환 / 환불</th>
+                                            <td>
+                                                <strong>조건 확인</strong><br/>
+                                                문의 후 취소 가능여부 확인해 주세요.
+                                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -234,15 +287,13 @@ const ProductDetail = ({location}) => {
                                     <div>
                                         <span className="pic"/>
                                         <div>
-                                            <span className="name">소희</span>
+                                            <span className="name">지인</span>
                                             <time className="date"> 2020년 4월 20일</time>
                                         </div>
-                                        <span className="stars"><Star starNum={5}/></span>
+                                        <span className="stars"><Star starNum={data.review.star}/></span>
                                     </div>
                                     <p>
-                                        <img src="" alt=""/>
-                                        섬유탈취제를 다 써서 고민하다가 샀는데 향기가 좋아용!<br/>
-                                        생각도 못한 샘플까지! 잘 쓸게영 작가님~
+                                        {data.review.text}
                                     </p>
                                 </li>
                             </ul>
@@ -257,8 +308,8 @@ const ProductDetail = ({location}) => {
                                     <div className="customer">
                                         <span className="pic"/>
                                         <div>
-                                            <span className="name">조미정</span>
-                                            <p>혹시 다 쓰고 공병으로 쓸 수 있나요?</p>
+                                            <span className="name">지인</span>
+                                            <p>배송 어느정도 걸릴까요?</p>
                                         </div>
                                     </div>
                                     <div className="artist">
@@ -266,8 +317,8 @@ const ProductDetail = ({location}) => {
                                             <li>
                                                 <span className="pic"/>
                                                 <div>
-                                                    <span className="name">조미정</span>
-                                                    <p>안녕하세요. : ) 해당 제품은 압착형 방식으로 재사용이 조금 힘드실거에요. ㅜ</p>
+                                                    <span className="name">{data.artist}</span>
+                                                    <p>안녕하세요~ 주문 후 배송은 3일정도 소요됩니다!</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -284,21 +335,22 @@ const ProductDetail = ({location}) => {
             </ProductInfo>
             <ArtistInfo ref={artistInfoRef}>
                 <div className="center">
+                    {artistProducts[0] &&
                     <div className="products">
                         <SectionTitle>판매중인 다른 제품들 <button>더보기</button></SectionTitle>
                         <ul>
-                            <ProductItem noReview={true} artistSection={true}/>
-                            <ProductItem noReview={true} artistSection={true}/>
-                            <ProductItem noReview={true} artistSection={true}/>
-                            <ProductItem noReview={true} artistSection={true}/>
+                            {artistProducts.map((v, i)=>{
+                                return <ProductItem noReview={true} artistSection={true} data={v}/>
+                            })}
                         </ul>
-                    </div>
+                    </div>                    
+                    }
                     <div className="artist">
                         <div>
                             <span className="pic"/>
-                            <span className="name">심플리어돌</span>
+                            <span className="name">{data.artist}</span>
                             <Star starNum={5}/>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel saepe est accusamus eveniet, explicabo velit labore distinct</p>
+                            <p>관련 문의는 메시지로 부탁드려요~</p>
                             <div>
                                 <button>♥︎︎ 작가로 추가</button>
                                 <button>작가 홈</button>
@@ -313,31 +365,17 @@ const ProductDetail = ({location}) => {
                     <div>   
                         <SectionTitle>이 작품과 함께 많이 본 다른 작품</SectionTitle>
                         <ul>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
+                            {getDummyDataRandomly(10).map((v, i)=>{
+                                return <ProductItem noReview={true} data={v}/>
+                            })}
                         </ul>
                     </div>
                     <div>
-                        <SectionTitle>휴대폰 케이스 인기 작품<button>더보기</button></SectionTitle>
+                        <SectionTitle>{data.category} 인기 작품<button>더보기</button></SectionTitle>
                         <ul>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
-                            <ProductItem noReview={true}/>
+                            {getDummyDataRandomly(10).map((v, i)=>{
+                                return <ProductItem noReview={true} data={v}/>
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -531,34 +569,45 @@ const DetailInfoLi = styled.li`
         border-top: 1px solid #ccc;
         font-size: 12px;
         display: none;
+        & tbody{
+            display: block;
+            width: 100%;
+        }
         & tr{
+            display: flex;
+            box-sizing: border-box;
             width: 100%;
             border-bottom: 1px solid #ccc;
             line-height: 1.5;
             &:last-child{
                 border: none;
             }
-            & *{
-                padding: 15px;
-            }
         }
         & th{
+            box-sizing: border-box;
             width: 30%;
             background: #eee;
             border-right: 1px solid #ccc;
             color: #666;
+            padding: 15px;
         }
         & td{
+            display: block;
+            box-sizing: border-box;
             width: 70%;
             color: #333;
+            padding: 15px;
+            & strong{
+                color: #22a7af;
+            }
         }
     }
 `
 const SocialInfo = styled.div`
     & span.pic{
-         width:32px;
+        width:32px;
         height: 32px;
-        background: red;
+        background: url('/thumbnail/dummyThumbnail_1.jpg') no-repeat center center / contain;
         display: inline-block;
         border-radius: 32px;
         margin-right: 10px;
@@ -626,6 +675,9 @@ const SocialInfo = styled.div`
             margin-bottom: 10px;
             border-radius: 3px;
         }
+        & .artist .pic{
+            background: url('/thumbnail/dummyThumbnail_2.jpg') no-repeat center center / contain;
+        }
         & .replyInput{
             padding: 16px 0 50px 0;
             border-top: 1px solid #d9d9d9;
@@ -635,7 +687,7 @@ const SocialInfo = styled.div`
                 width: 32px;
                 height: 32px;
                 display: block;
-                background: grey;
+                background: url('/thumbnail/dummyThumbnail_1.jpg') no-repeat center center / contain;
                 border-radius: 32px;
                 margin-right: 10px; 
             }
@@ -729,7 +781,7 @@ const TopInfo = styled.div`
                 width: 24px;
                 height: 24px;
                 display: inline-block;
-                background: red;
+                background: url('/thumbnail/dummyThumbnail_2.jpg') no-repeat center center / contain;
                 border-radius: 24px;
                 vertical-align: middle;
                 margin-right: 5px;
@@ -962,6 +1014,7 @@ const ArtistInfo = styled.div`
         display: flex;
         padding: 100px 0;
         justify-items: center;
+        align-items: center;
     }
     & div.products{
         width: 65%;
@@ -987,6 +1040,7 @@ const ArtistInfo = styled.div`
     & div.artist{
         width: 35%;
         text-align: center;
+        margin: 0 auto;
         &>div{
             width: 275px;
             margin: 0 auto;
@@ -995,7 +1049,7 @@ const ArtistInfo = styled.div`
             width: 72px;
             height: 72px;
             display: block;
-            background: grey;
+            background: url('/thumbnail/dummyThumbnail_2.jpg') no-repeat center center / contain;
             border-radius: 72px;
             margin: 30px auto 10px auto;
         }
@@ -1010,6 +1064,7 @@ const ArtistInfo = styled.div`
             line-height: 1.5;
             font-size: 14px;
             padding-bottom: 10px;
+            min-height: 50px;
         }
         & button{
             color: #333;

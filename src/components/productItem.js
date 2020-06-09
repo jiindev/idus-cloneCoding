@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useCallback} from "react";
+import React, {memo} from "react";
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import styled from 'styled-components';
@@ -17,7 +17,7 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
             { !noReview &&
                 <div className="review">
                   <Star starNum={data && data.review.star}/>
-                  {data && data.review.text}
+                  <span class="text">{data && data.review.text}</span>
                 </div>
             }
         </Text>
@@ -81,12 +81,21 @@ const Text = styled.div`
     }
     & h4{
       color: #333;
+      line-height: 1.5
     }
   }
   & div.review{
     border-top: 1px solid #d9d9d9;
     font-size: 12px;
     color: #666;
+    & .text{
+      display: -webkit-box;
+      line-height: 1.5;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `;
 

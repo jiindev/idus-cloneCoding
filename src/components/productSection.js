@@ -144,6 +144,7 @@ const MoreButton = styled.button`
     background: none;
     transition: all .2s ease;
     outline: none;
+    cursor: pointer;
     &:hover{
         background: #f5f5f5;
     }
