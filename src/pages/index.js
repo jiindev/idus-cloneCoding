@@ -14,12 +14,12 @@ const IndexPage = () => {
   const section4Ref = useRef();
   const section5Ref = useRef();
   const section6Ref = useRef();
-  const section1Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
-  const section2Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
-  const section3Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
-  const section4Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
-  const section5Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
-  const section6Products = useMemo(()=>(getDummyDataRandomly(10)),[]);
+  const section1Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
+  const section2Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
+  const section3Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
+  const section4Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
+  const section5Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
+  const section6Products = useMemo(()=>(getDummyDataRandomly(50)),[]);
 
   const onClickNav = useCallback( (sectionRef) => () => {
     window.scrollTo(0, sectionRef.current.offsetTop+1);
