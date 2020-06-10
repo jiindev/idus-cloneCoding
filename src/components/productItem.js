@@ -8,8 +8,8 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
     <ProductLi artistSection={artistSection}>
         <div>
         <Link to="/product" state={{data}}>
-        <Thumbnail thumbnailUrl={data && data.thumbnailUrl} artistSection={artistSection}>
-            <img src={`/thumbnail/${data.thumbnailUrl}`} alt={`${data && data.title} 썸네일 이미지`}/>
+        <Thumbnail artistSection={artistSection}>
+            <img src={`/thumbnail/${data && data.thumbnailUrl}`} alt={`${data && data.title} 썸네일 이미지`}/>
         </Thumbnail>
         <Text>
             <div className="title">
