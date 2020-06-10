@@ -8,7 +8,9 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
     <ProductLi artistSection={artistSection}>
         <div>
         <Link to="/product" state={{data}}>
-        <Thumbnail thumbnailUrl={data && data.thumbnailUrl} artistSection={artistSection}><span/></Thumbnail>
+        <Thumbnail thumbnailUrl={data && data.thumbnailUrl} artistSection={artistSection}>
+            <img src={`/thumbnail/${data.thumbnailUrl}`} alt={`${data.title} 썸네일 이미지`}/>
+        </Thumbnail>
         <Text>
             <div className="title">
               <span>{data && data.artist}</span>
@@ -50,19 +52,12 @@ const ProductLi = styled.li`
 const Thumbnail = styled.div`
     width: 100%;
     overflow: hidden;
-    height: ${props=>props.artistSection ? '150px' : '200px'};
-  & span{
-    display: block;
+  & img{
     width: 100%;
-    height: 100%;
-    background: ${props=>`url('/thumbnail/${props.thumbnailUrl}') no-repeat center center / cover`};
-    transition: all .5s ease;
-  }
-  &:hover span{
-    transform: scale(1.1);
-  }
-  @media only screen and (max-width: 720px) {
-    height: 200px;
+    transition: transform .35s;
+    &:hover{
+      transform: scale(1.1);
+    }
   }
 `;
 const Text = styled.div`
