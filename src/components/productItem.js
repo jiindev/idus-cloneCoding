@@ -16,12 +16,10 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
               <span>{data && data.artist}</span>
               <h4>{data && data.title}</h4>
             </div>
-            { !noReview &&
                 <div className="review">
                   <Star starNum={data && data.review.star}/>
                   <span className="text">{data && data.review.text}</span>
                 </div>
-            }
         </Text>
         </Link>
         </div>
