@@ -4,7 +4,9 @@ import PropTypes from "prop-types"
 import styled from 'styled-components';
 import Star from "./star"
 
-const ProductItem = memo(({ data, noReview, artistSection }) => (
+const ProductItem = memo(({ data, noReview, artistSection }) => {
+  console.log(data);
+  return (
     <ProductLi artistSection={artistSection}>
         <div>
         <Link to="/product" state={{data}}>
@@ -16,15 +18,18 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
               <span>{data && data.artist}</span>
               <h4>{data && data.title}</h4>
             </div>
+            { !noReview &&
                 <div className="review">
                   <Star starNum={data && data.review.star}/>
                   <span className="text">{data && data.review.text}</span>
                 </div>
+            }
         </Text>
         </Link>
         </div>
     </ProductLi>
-));
+  );
+});
 
 const ProductLi = styled.li`
       width: ${props=>props.artistSection ? '25%' : '20%'};
