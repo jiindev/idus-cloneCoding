@@ -6,7 +6,7 @@ import ProductItem from './productItem';
 import {getDummyDataRandomly} from '../data/data';
 import styled from 'styled-components';
 
-const ProductPage = memo(({ title, description, bannerBackground }) => {
+const SubPage = memo(({ title, description, bannerBackground }) => {
   const [dummyData, setDummyData] = useState(getDummyDataRandomly(20));
 
   const onScroll = useCallback(() => {
@@ -42,10 +42,10 @@ const Wrap = styled.div`
   padding-bottom: 50px;
 `;
 
-ProductPage.propTypes = {
+SubPage.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   bannerBackground: PropTypes.object,
 }
 
-export default ProductPage
+export default SubPage
