@@ -4,9 +4,7 @@ import PropTypes from "prop-types"
 import styled from 'styled-components';
 import Star from "./star"
 
-const ProductItem = memo(({ data, noReview, artistSection }) => {
-  console.log(data);
-  return (
+const ProductItem = memo(({ data, noReview, artistSection }) => (
     <ProductLi artistSection={artistSection}>
         <div>
         <Link to="/product" state={{data}}>
@@ -28,8 +26,7 @@ const ProductItem = memo(({ data, noReview, artistSection }) => {
         </Link>
         </div>
     </ProductLi>
-  );
-});
+));
 
 const ProductLi = styled.li`
       width: ${props=>props.artistSection ? '25%' : '20%'};

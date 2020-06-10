@@ -554,7 +554,7 @@ const dummyData = [
   //원하는 갯수의 더미데이터 가져오기 (랜덤출력)
   export const getDummyDataRandomly = (dataSize)  => {
     const dummyCopy = [...dummyData];
-    for (let i = dummyCopy.length - 1; i > 0; i--) {
+    for (let i = dataSize - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [dummyCopy[i], dummyCopy[j]] = [dummyCopy[j], dummyCopy[i]];
     }
