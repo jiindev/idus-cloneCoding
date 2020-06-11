@@ -9,7 +9,7 @@ const ProductItem = memo(({ data, noReview, artistSection }) => (
         <div>
         <Link to="/product" state={{data}}>
         <Thumbnail artistSection={artistSection}>
-            <img src={`/thumbnail/${data && data.thumbnailUrl}`} alt={`${data && data.title} 썸네일 이미지`} key={new Date()}/>
+            <img src={`/thumbnail/${data && data.thumbnailUrl}?${new Date().getTime()}`} alt={`${data && data.title} 썸네일 이미지`}/>
         </Thumbnail>
         <Text>
             <div className="title">
