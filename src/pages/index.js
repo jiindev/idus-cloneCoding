@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useEffect, useMemo} from "react"
+import React, {useRef, useCallback, useEffect, useState} from "react"
 import styled from 'styled-components';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,12 +14,21 @@ const IndexPage = () => {
   const section4Ref = useRef();
   const section5Ref = useRef();
   const section6Ref = useRef();
-  const section1Data = useMemo(()=>(getDummyDataRandomly(20)), []);
-  const section2Data = useMemo(()=>(getDummyDataRandomly(20)), []);
-  const section3Data = useMemo(()=>(getDummyDataRandomly(20)), []);
-  const section4Data = useMemo(()=>(getDummyDataRandomly(20)), []);
-  const section5Data = useMemo(()=>(getDummyDataRandomly(20)), []);
-  const section6Data = useMemo(()=>(getDummyDataRandomly(20)), []);
+  const [section1Data, setSection1Data] = useState([]);
+  const [section2Data, setSection2Data] = useState([]);
+  const [section3Data, setSection3Data] = useState([]);
+  const [section4Data, setSection4Data] = useState([]);
+  const [section5Data, setSection5Data] = useState([]);
+  const [section6Data, setSection6Data] = useState([]);
+
+  useEffect(()=>{
+    setSection1Data(getDummyDataRandomly(50));
+    setSection2Data(getDummyDataRandomly(50));
+    setSection3Data(getDummyDataRandomly(50));
+    setSection4Data(getDummyDataRandomly(50));
+    setSection5Data(getDummyDataRandomly(50));
+    setSection6Data(getDummyDataRandomly(50));
+  }, []);
 
   const onClickNav = useCallback( (sectionRef) => () => {
     window.scrollTo(0, sectionRef.current.offsetTop+1);
