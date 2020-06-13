@@ -18,7 +18,7 @@ UI 구현 능력의 향상 목적으로 진행된 사이트입니다.
 만약 문제가 발생할 경우, jiindev@gmail.com으로 연락 주시면
 빠르게 대처하도록 하겠습니다.
 
-[사이트 바로가기](https://jdus.netlify.app/)
+[사이트 바로가기](https://www.jdus.site/) * 기존의 링크에서 변경되었습니다.
 
 
 ## 🚀 Key UI
