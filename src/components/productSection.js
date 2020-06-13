@@ -49,6 +49,9 @@ const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) =>
             <button onClick={next}><i className="ui_icon--arrow-right"/></button>
           </div>
         </Title>
+        {dataArray.length<1 ?
+        <Loading/>
+        :
         <Slider ref={sliderRef} {...settings}>
           {dataArray && dataArray.map((ul, i)=>(
             <div key={i}>
@@ -60,6 +63,7 @@ const ProductSecion = memo(forwardRef(({ title, iconClass, data, link }, ref) =>
              </div>
           ))}
         </Slider>
+        }
         <Link to={`/main/${link}`}><MoreButton>{title} 더보기</MoreButton></Link>
       </div>
     </Wrap>
@@ -129,6 +133,14 @@ const Title = styled.div`
       font-size: 16px;
     }
   }
+`;
+
+const Loading = styled.div`
+  background: red;
+  width: 100px;
+  height: 100px;
+  background: url('/loading.svg') no-repeat center center / contain;
+  margin: 0 auto;
 `;
 
 const MoreButton = styled.button`
